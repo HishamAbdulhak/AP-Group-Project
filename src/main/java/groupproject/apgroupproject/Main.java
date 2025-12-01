@@ -18,7 +18,7 @@ public class Main extends Application {
 
             Scene scene = new Scene(root);
 
-            stage.setTitle("My Group Project"); // Optional: Give the window a title
+            stage.setTitle("My Group Project");
             stage.setScene(scene);
             stage.show();
 
@@ -28,7 +28,6 @@ public class Main extends Application {
         }
     }
 
-    // 4. The standard main method to launch the application
     public static void main(String[] args) {
         launch();
     }

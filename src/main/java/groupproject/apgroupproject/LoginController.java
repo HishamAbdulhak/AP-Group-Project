@@ -20,8 +20,8 @@ public class LoginController {
     @FXML private PasswordField newPasswordField;
 
     // --- 3. ADMIN LOGIN TAB ---
-    @FXML private TextField adminUserField;     // <--- Make sure you added fx:id="adminUserField"
-    @FXML private PasswordField adminPasswordField; // <--- Make sure you added fx:id="adminPasswordField"
+    @FXML private TextField adminUserField;
+    @FXML private PasswordField adminPasswordField;
 
     // --- OOP SERVICES ---
     private AuthenticationService authService;
@@ -40,20 +40,19 @@ public class LoginController {
         String id = studentIDField.getText().trim();
         String pass = passwordField.getText();
 
-        // 1. Basic Validation
+        //Basic Validation
         if (id.isEmpty() || pass.isEmpty()) {
             notifyService.showErrorMessage("Login Error", "Please enter both ID and Password.");
             return;
         }
 
-        // 2. NEW RULE: Check ID format before checking file
         if (!id.matches("\\d+")) {
             notifyService.showErrorMessage("Invalid Format",
                     "Student ID must be a number.");
             return;
         }
 
-        // 3. Attempt Login
+        //Attempt Login
         if (authService.loginStudent(id, pass)) {
             System.out.println("Login Success! Switching scenes...");
             // Ensure you use the Correct File Name here!
@@ -85,21 +84,21 @@ public class LoginController {
             return;
         }
 
-        // 3. NEW RULE: Validate Email (Must contain '@')
+        //Validate Email (Must contain '@')
         if (!email.contains("@")) {
             notifyService.showErrorMessage("Invalid Email",
                     "Please enter a valid email address containing '@'.");
             return;
         }
 
-        // 4. Validate Password (Min 8 chars)
+        //Validate Password (Min 8 chars)
         if (pass.length() < 8) {
             notifyService.showErrorMessage("Weak Password",
                     "Password must be at least 8 characters long.");
             return;
         }
 
-        // 5. Attempt Registration
+        //Attempt Registration
         boolean isRegistered = authService.register(id, name, email, pass);
 
         if (isRegistered) {
@@ -125,6 +124,7 @@ public class LoginController {
 
         if (authService.loginAdmin(user, pass)) {
             // Admins go to the DASHBOARD, not the Home Screen
+            // TODO: admins have the same interfaces as students, but with extra buttons to admin dashboard, will be redirected to homescreen as usual maybe
             navigateTo("Admin Dashboard.fxml", event);
         } else {
             notifyService.showErrorMessage("Access Denied", "Invalid Admin Credentials");
@@ -133,7 +133,6 @@ public class LoginController {
 
     // Helper to reduce duplicated code
     private void navigateTo(String fxmlFile, ActionEvent event) {
-        // Get the stage from ANY button that triggered the event
         Button btn = (Button) event.getSource();
         Stage stage = (Stage) btn.getScene().getWindow();
         SceneSwitcher.switchTo(stage, fxmlFile);

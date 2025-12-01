@@ -8,7 +8,6 @@ public class FileAuthentication implements AuthenticationService {
     private final String studentFile;
     private final String adminFile;
 
-    // ✅ FIXED CONSTRUCTOR: Initializes both variables
     public FileAuthentication(String studentFile, String adminFile) {
         this.studentFile = studentFile;
         this.adminFile = adminFile;
@@ -48,7 +47,7 @@ public class FileAuthentication implements AuthenticationService {
         }
     }
 
-    // Helper: Checks if ID/Username and Password match in a file
+    //Checks if ID/Username and Password match in a file
     private boolean checkCredentials(String filePath, String targetId, String targetPass, int idIndex, int passIndex) {
         File file = new File(filePath);
         if (!file.exists()) return false;
@@ -77,7 +76,7 @@ public class FileAuthentication implements AuthenticationService {
         return false;
     }
 
-    // Helper: Checks if just the ID exists (for registration)
+    //Checks if just the ID exists (for registration)
     private boolean isIdTaken(String id) {
         File file = new File(studentFile);
         if (!file.exists()) return false;
