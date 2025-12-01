@@ -130,6 +130,10 @@ public class LoginController {
             notifyService.showErrorMessage("Access Denied", "Invalid Admin Credentials");
         }
     }
+    @FXML
+    private void handleforgotPassword(ActionEvent event) {
+        notifyService.showInfoMessage("Forgot Password", "Please contact the admins to reset your password.");
+    }
 
     // Helper to reduce duplicated code
     private void navigateTo(String fxmlFile, ActionEvent event) {
