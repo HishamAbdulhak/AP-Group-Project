@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   
+   <!-- SIDEBAR -->
+   <left>
+      <VBox prefHeight="768.0" prefWidth="192.0" style="-fx-background-color: #2C3E50;" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="UniHelp AI" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="30.0" left="20.0" top="30.0" />
+               </VBox.margin>
+            </Label>
+            
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="46.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text="Home">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="46.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text="AI Chat">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="46.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text="Browse Topics">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            
+            <!-- Admin Button (ACTIVE) -->
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="46.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-border-color: white; -fx-border-radius: 7; -fx-border-width: 1;" text="Admin Dashboard">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="10.0" right="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            
+            <Region VBox.vgrow="ALWAYS" />
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="46.0" style="-fx-background-color: transparent; -fx-text-fill: #bdc3c7; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text="My Profile">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="10.0" right="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </left>
+   
+   <!-- MAIN SETTINGS CONTENT -->
+   <center>
+      <VBox spacing="20.0" style="-fx-background-color: #Fdfdfd;" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+         </padding>
+         <children>
+            
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #7f8c8d; -fx-cursor: hand;" text="← Back">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Label text="System Configuration">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            
+            <!-- Settings Form Container -->
+            <VBox maxHeight="1.7976931348623157E308" spacing="30.0" style="-fx-background-color: white; -fx-border-color: #ecf0f1; -fx-border-radius: 5; -fx-background-radius: 5;" VBox.vgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </padding>
+               <children>
+                  
+                  <!-- Section 1: AI Configuration -->
+                  <VBox spacing="15.0">
+                     <children>
+                        <Label text="AI Model Configuration" textFill="#2c3e50">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Separator prefWidth="200.0" />
+                        
+                        <HBox spacing="20.0">
+                           <children>
+                              <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="OpenAI API Key" textFill="#7f8c8d" />
+                                    <PasswordField promptText="sk-..." style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-padding: 8;" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Model Name" textFill="#7f8c8d" />
+                                    <TextField style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-padding: 8;" text="gpt-3.5-turbo" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        
+                        <!-- Sliders -->
+                        <HBox spacing="40.0">
+                           <children>
+                              <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Temperature (Creativity): 0.7" textFill="#7f8c8d" />
+                                    <Slider blockIncrement="0.1" majorTickUnit="0.5" max="1.0" showTickLabels="true" showTickMarks="true" value="0.7" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Max Context Tokens: 2048" textFill="#7f8c8d" />
+                                    <Slider blockIncrement="100.0" majorTickUnit="1000.0" max="4096.0" min="512.0" showTickLabels="true" showTickMarks="true" value="2048.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Section 2: Storage -->
+                  <VBox spacing="15.0">
+                     <children>
+                        <Label text="Knowledge Base Storage" textFill="#2c3e50">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Separator prefWidth="200.0" />
+                        
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="Local Vector Store Path" textFill="#7f8c8d" />
+                              <HBox spacing="10.0">
+                                 <children>
+                                    <TextField style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-padding: 8;" text="./data/vector_store.db" HBox.hgrow="ALWAYS" />
+                                    <Button mnemonicParsing="false" style="-fx-background-color: #ecf0f1; -fx-text-fill: #2c3e50; -fx-cursor: hand;" text="Browse..." />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        
+                        <CheckBox mnemonicParsing="false" selected="true" text="Enable auto-ingestion on startup" textFill="#34495e" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </VBox>
+                  
+                  <Region VBox.vgrow="ALWAYS" />
+                  
+                  <!-- Action Buttons -->
+                  <HBox alignment="CENTER_RIGHT" spacing="15.0">
+                     <children>
+                        <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #e74c3c; -fx-cursor: hand;" text="Reset Defaults" />
+                        <Button mnemonicParsing="false" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;" text="Save Changes">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
+                           </padding>
+                        </Button>
+                     </children>
+                  </HBox>
+                  
+               </children>
+            </VBox>
+            
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

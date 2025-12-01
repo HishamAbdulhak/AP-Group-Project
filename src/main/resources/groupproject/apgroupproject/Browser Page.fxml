@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <!-- SIDEBAR -->
+      <VBox prefHeight="768.0" prefWidth="192.0" style="-fx-background-color: #2C3E50;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="768.0" prefWidth="192.0" style="-fx-background-color: #2C3E50;">
+               <children>
+                  <Label text="UniHelp AI" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" left="20.0" top="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="46.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-border-width: 1;" text="Home">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="46.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text="AI Chat">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="46.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-border-color: white; -fx-border-radius: 7;" text="Browse Topics">
+                     <VBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Region VBox.vgrow="ALWAYS" />
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="46.0" style="-fx-background-color: transparent; -fx-text-fill: #bdc3c7; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text="My Profile">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="10.0" right="10.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </left>
+
+   <center>
+      <!-- MAIN CONTENT -->
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" style="-fx-background-color: #Fdfdfd;" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+         </padding>
+         <children>
+
+            <!-- Header Section -->
+            <VBox spacing="10.0">
+               <children>
+                  <Label text="Browse Knowledge Base">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label text="Find answers to common university questions by category." textFill="#7f8c8d">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+
+            <!-- Search Bar -->
+            <HBox prefHeight="45.0" prefWidth="200.0">
+               <children>
+                  <TextField promptText="Filter topics by keyword..." style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+
+            <!-- The Accordion List -->
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: transparent; -fx-background: transparent;" VBox.vgrow="ALWAYS">
+               <content>
+                  <Accordion style="-fx-background-color: transparent;">
+                     <panes>
+
+                        <!-- Category 1: Admissions -->
+                        <TitledPane animated="false" text="Admissions &amp; Registration">
+                           <content>
+                              <VBox spacing="10.0">
+                                 <children>
+                                    <Hyperlink text="How do I apply for a Student ID card?" textFill="#2980b9">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Hyperlink>
+                                    <Hyperlink text="What are the deadlines for international applications?" textFill="#2980b9">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Hyperlink>
+                                    <Hyperlink text="How to transfer credits from another university?" textFill="#2980b9">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Hyperlink>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TitledPane>
+
+                        <!-- Category 3: Campus Life -->
+                        <TitledPane animated="false" text="Campus Facilities">
+                           <content>
+                              <VBox spacing="10.0">
+                                 <children>
+                                    <Hyperlink text="View Campus Map and Parking Zones" textFill="#2980b9">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Hyperlink>
+                                    <Hyperlink text="Library opening hours and locations" textFill="#2980b9">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Hyperlink>
+                                    <Hyperlink text="How to book a study room?" textFill="#2980b9">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Hyperlink>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TitledPane>
+
+                        <!-- Category 2: Exams -->
+                        <TitledPane animated="false" text="Examinations &amp; Grading">
+                           <content>
+                              <VBox spacing="10.0">
+                                 <children>
+                                    <Hyperlink text="Download the Fall 2025 Exam Schedule (PDF)" textFill="#2980b9">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Hyperlink>
+                                    <Hyperlink text="What is the policy on plagiarism?" textFill="#2980b9">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Hyperlink>
+                                    <Hyperlink text="How do I appeal a grade?" textFill="#2980b9">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Hyperlink>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TitledPane>
+
+                     </panes>
+                  </Accordion>
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #ecf0f1;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="groupproject.apgroupproject.LoginController">
+   <children>
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="450.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+         <children>
+            <Label text="UniHelp AI" textFill="#2c3e50">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="30.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Welcome back! Please log in." textFill="#7f8c8d">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Label>
+
+            <TabPane fx:id="loginTabPane" prefHeight="480.0" prefWidth="200.0" style="-fx-background-color: transparent;" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab text="Student Login">
+                     <content>
+                        <VBox alignment="TOP_CENTER" spacing="15.0">
+                           <padding>
+                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                           </padding>
+                           <children>
+                              <VBox alignment="CENTER_LEFT" spacing="5.0">
+                                 <children>
+                                    <Label text="Student ID" textFill="#2c3e50">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="studentIDField" promptText="e.g. 0368112" style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-padding: 10;" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" spacing="5.0">
+                                 <children>
+                                    <Label text="Password" textFill="#2c3e50">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <PasswordField fx:id="passwordField" promptText="Enter password" style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-padding: 10;" />
+                                 </children>
+                              </VBox>
+
+                              <Button fx:id="studentLoginButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleStudentLogin" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;" text="Log In as Student">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="12.0" top="12.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Button style="-fx-background-color: transparent; -fx-text-fill: #3498db; -fx-cursor: hand;" text="Forgot Password?" underline="true" />
+                           </children>
+                        </VBox>
+                     </content>
+                  </Tab>
+
+                  <Tab text="Register">
+                     <content>
+                        <VBox alignment="TOP_CENTER" spacing="12.0">
+                           <padding>
+                              <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+                           </padding>
+                           <children>
+                              <VBox alignment="CENTER_LEFT" spacing="5.0">
+                                 <children>
+                                    <Label text="Student ID" textFill="#2c3e50">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="newStudentIdField" promptText="Your University ID" style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-padding: 8;" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" spacing="5.0">
+                                 <children>
+                                    <Label text="Full Name" textFill="#2c3e50">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="fullNameField" promptText="First and Last Name" style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-padding: 8;" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" spacing="5.0">
+                                 <children>
+                                    <Label text="Email" textFill="#2c3e50">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="emailField" promptText="student@uni.edu" style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-padding: 8;" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" spacing="5.0">
+                                 <children>
+                                    <Label text="Create Password" textFill="#2c3e50">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <PasswordField fx:id="newPasswordField" promptText="Min 8 chars" style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-padding: 8;" />
+                                 </children>
+                              </VBox>
+
+                              <Button fx:id="signUpButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleRegister" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;" text="Create Account">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </content>
+                  </Tab>
+
+                  <Tab text="Admin Login">
+                     <content>
+                        <VBox alignment="TOP_CENTER" spacing="15.0">
+                           <padding>
+                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                           </padding>
+                           <children>
+                              <VBox alignment="CENTER_LEFT" spacing="5.0">
+                                 <children>
+                                    <Label text="Admin Username" textFill="#2c3e50">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="adminUserField" promptText="Enter admin username" style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-padding: 10;" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" spacing="5.0">
+                                 <children>
+                                    <Label text="Password" textFill="#2c3e50">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <PasswordField fx:id="adminPasswordField" promptText="Enter password" style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-padding: 10;" />
+                                 </children>
+                              </VBox>
+
+                              <Button fx:id="adminLogin" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleAdminLogin" style="-fx-background-color: #2c3e50; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;" text="Log In as Admin">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="12.0" top="12.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </children>
+      </VBox>
+   </children>
+</StackPane>
