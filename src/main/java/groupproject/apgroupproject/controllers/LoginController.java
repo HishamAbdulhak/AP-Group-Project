@@ -1,5 +1,7 @@
-package groupproject.apgroupproject;
+package groupproject.apgroupproject.controllers;
 
+import groupproject.apgroupproject.models.UserSession;
+import groupproject.apgroupproject.services.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -55,7 +57,8 @@ public class LoginController {
         //Attempt Login
         if (authService.loginStudent(id, pass)) {
             System.out.println("Login Success! Switching scenes...");
-            // Ensure you use the Correct File Name here!
+            //Ensuring Student does not have access to admin dashboard
+            UserSession.startSession(id, "Student Name", "email", pass, false);
             navigateTo("HomeScreen.fxml", event);
         } else {
             notifyService.showErrorMessage("Login Failed",
@@ -123,9 +126,9 @@ public class LoginController {
         String pass = adminPasswordField.getText();
 
         if (authService.loginAdmin(user, pass)) {
-            // Admins go to the DASHBOARD, not the Home Screen
-            // TODO: admins have the same interfaces as students, but with extra buttons to admin dashboard, will be redirected to homescreen as usual maybe
-            navigateTo("Admin Dashboard.fxml", event);
+            //Ensures Admin role persists so admins can see dashboard
+            UserSession.startSession(user, "Administrator", "admin@uni.edu", pass, true);
+            navigateTo("HomeScreen.fxml", event);
         } else {
             notifyService.showErrorMessage("Access Denied", "Invalid Admin Credentials");
         }

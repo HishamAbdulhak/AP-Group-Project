@@ -1,4 +1,4 @@
-package groupproject.apgroupproject;
+package groupproject.apgroupproject.services;
 
 public interface AuthenticationService {
     boolean loginStudent(String id, String password);

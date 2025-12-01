@@ -5,4 +5,10 @@ module groupproject.apgroupproject {
 
     opens groupproject.apgroupproject to javafx.fxml;
     exports groupproject.apgroupproject;
+    exports groupproject.apgroupproject.controllers;
+    opens groupproject.apgroupproject.controllers to javafx.fxml;
+    exports groupproject.apgroupproject.services;
+    opens groupproject.apgroupproject.services to javafx.fxml;
+    exports groupproject.apgroupproject.models;
+    opens groupproject.apgroupproject.models to javafx.fxml;
 }

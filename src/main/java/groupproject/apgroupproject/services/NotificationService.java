@@ -1,4 +1,4 @@
-package groupproject.apgroupproject;
+package groupproject.apgroupproject.services;
 
 public interface NotificationService {
     void showErrorMessage(String title, String message);

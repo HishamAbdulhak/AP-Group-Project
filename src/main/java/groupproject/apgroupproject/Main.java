@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             //Load the FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Log In Screen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
 
             Parent root = loader.load();
 

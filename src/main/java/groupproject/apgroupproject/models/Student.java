@@ -1,4 +1,4 @@
-package groupproject.apgroupproject;
+package groupproject.apgroupproject.models;
 
 public class Student {
     private String id;

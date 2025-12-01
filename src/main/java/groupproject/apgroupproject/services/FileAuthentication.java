@@ -1,4 +1,4 @@
-package groupproject.apgroupproject;
+package groupproject.apgroupproject.services;
 
 import java.io.*;
 import java.util.Scanner;

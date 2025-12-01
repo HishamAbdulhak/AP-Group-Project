@@ -1,4 +1,4 @@
-package groupproject.apgroupproject;
+package groupproject.apgroupproject.services;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -10,7 +10,7 @@ public class AlertService implements NotificationService {
     public void showErrorMessage(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
-        alert.setHeaderText(null); // Optional: Removes the header to make it cleaner
+        alert.setHeaderText(null); //Removes the header to make it cleaner
         alert.setContentText(message);
         alert.showAndWait();
     }

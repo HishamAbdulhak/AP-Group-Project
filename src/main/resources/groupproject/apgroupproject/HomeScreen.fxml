@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="groupproject.apgroupproject.controllers.HomeController">
    
    <!-- SIDEBAR Navigation -->
    <left>
@@ -30,7 +30,7 @@
                </VBox.margin>
             </Label>
             
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="46.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-border-color: white; -fx-border-radius: 7; -fx-border-width: 1;" text="Home">
+            <Button fx:id="homeButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="46.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-border-color: white; -fx-border-radius: 7; -fx-border-width: 1;" text="Home">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" />
                </VBox.margin>
@@ -42,7 +42,7 @@
                </font>
             </Button>
             
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="46.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text="AI Chat">
+            <Button fx:id="aiChatButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="46.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text="AI Chat">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" />
                </VBox.margin>
@@ -54,9 +54,9 @@
                </font>
             </Button>
             
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="46.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text="Browse Topics">
+                  <Button fx:id="browseButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="46.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text="Browse Topics">
                <VBox.margin>
-                  <Insets left="10.0" right="10.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
                </VBox.margin>
                <padding>
                   <Insets left="20.0" />
@@ -64,12 +64,23 @@
                <font>
                   <Font size="14.0" />
                </font>
+            </Button>
+            <Button fx:id="adminDashboard" layoutX="20.0" layoutY="217.0" managed="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="46.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text="Admin Dashboard" visible="false">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </VBox.margin>
             </Button>
             
             <Region VBox.vgrow="ALWAYS" />
             
             <!-- NEW PROFILE BUTTON (Replaces Admin Login) -->
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: transparent; -fx-text-fill: #ecf0f1; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text="My Profile">
+            <Button fx:id="myProfileButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: transparent; -fx-text-fill: #ecf0f1; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text="My Profile">
                <VBox.margin>
                   <Insets bottom="20.0" left="10.0" right="10.0" />
                </VBox.margin>
@@ -109,12 +120,12 @@
                         
                         <HBox alignment="CENTER" maxWidth="800.0" prefHeight="50.0" spacing="10.0">
                            <children>
-                              <TextField promptText="Ask a question..." style="-fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #bdc3c7; -fx-padding: 0 20;" HBox.hgrow="ALWAYS">
+                              <TextField fx:id="questionText" promptText="Ask a question..." style="-fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #bdc3c7; -fx-padding: 0 20;" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </TextField>
-                              <Button mnemonicParsing="false" style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-background-radius: 25; -fx-cursor: hand;" text="Ask AI">
+                              <Button fx:id="askAiButton" mnemonicParsing="false" style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-background-radius: 25; -fx-cursor: hand;" text="Ask AI">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -163,32 +174,32 @@
                             <RowConstraints minHeight="100.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;" text="Admissions" wrapText="true">
+                              <Button fx:id="admissionsButtton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;" text="Admissions" wrapText="true">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;" text="Exams &amp; Grades" wrapText="true" GridPane.columnIndex="1">
+                              <Button fx:id="examsAndGrades" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;" text="Exams &amp; Grades" wrapText="true" GridPane.columnIndex="1">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;" text="Campus Life" wrapText="true" GridPane.columnIndex="2">
+                              <Button fx:id="campusLife" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;" text="Campus Life" wrapText="true" GridPane.columnIndex="2">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;" text="IT Support" wrapText="true" GridPane.rowIndex="1">
+                              <Button fx:id="itSupport" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;" text="IT Support" wrapText="true" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #9b59b6; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;" text="Library Services" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <Button fx:id="library" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #9b59b6; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;" text="Library Services" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #1abc9c; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;" text="Financial Aid" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                              <Button fx:id="financialAid" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #1abc9c; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;" text="Financial Aid" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -201,27 +212,27 @@
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </padding>
                            <children>
-                              <Hyperlink text="How to reset student email?" textFill="#2980b9">
+                              <Hyperlink fx:id="resetStudentEmail" text="How to reset student email?" textFill="#2980b9">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Hyperlink>
-                              <Hyperlink text="Download Exam Guidelines (PDF)" textFill="#2980b9">
+                              <Hyperlink fx:id="examPDF" text="Download Exam Guidelines (PDF)" textFill="#2980b9">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Hyperlink>
-                              <Hyperlink text="View Campus Map" textFill="#2980b9">
+                              <Hyperlink fx:id="campusMap" text="View Campus Map" textFill="#2980b9">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Hyperlink>
-                              <Hyperlink text="Deadline for course registration?" textFill="#2980b9">
+                              <Hyperlink fx:id="courseDeadline" text="Deadline for course registration?" textFill="#2980b9">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Hyperlink>
-                              <Hyperlink text="What clubs are there on campus?" textFill="#2980b9">
+                              <Hyperlink fx:id="clubOptions" text="What clubs are there on campus?" textFill="#2980b9">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
