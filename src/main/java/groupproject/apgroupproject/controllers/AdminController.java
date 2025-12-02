@@ -1,4 +1,10 @@
 package groupproject.apgroupproject.controllers;
 
-public class AdminController {
+import javafx.fxml.FXML;
+
+public class AdminController extends BaseController{
+    @FXML
+    public void initialize() {
+        super.setupSidebar();
+    }
 }

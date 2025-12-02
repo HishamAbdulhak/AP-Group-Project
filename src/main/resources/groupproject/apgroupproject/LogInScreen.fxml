@@ -73,7 +73,7 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </Button>
-                              <Button fx:id="forgotPassword" onAction="#handleforgotPassword" style="-fx-background-color: transparent; -fx-text-fill: #3498db; -fx-cursor: hand;" text="Forgot Password?" underline="true" />
+                              <Button fx:id="forgotPassword" onAction="#showForgotPasswordDialog" style="-fx-background-color: transparent; -fx-text-fill: #3498db; -fx-cursor: hand;" text="Forgot Password?" underline="true" />
                            </children>
                         </VBox>
                      </content>
@@ -124,6 +124,16 @@
                                        </font>
                                     </Label>
                                     <PasswordField fx:id="newPasswordField" promptText="Min 8 chars" style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-padding: 8;" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="237.0" spacing="5.0">
+                                 <children>
+                                    <Label text="Security Passcode: Which city were you born in?" textFill="#2c3e50">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="securityCode" style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-padding: 8;" />
                                  </children>
                               </VBox>
 

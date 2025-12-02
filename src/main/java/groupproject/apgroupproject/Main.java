@@ -12,13 +12,13 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             //Load the FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("LogInScreen.fxml"));
 
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
 
-            stage.setTitle("My Group Project");
+            stage.setTitle("UniHelp AI - Your Personalized FAQ System");
             stage.setScene(scene);
             stage.show();
 

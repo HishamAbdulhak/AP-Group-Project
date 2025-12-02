@@ -2,10 +2,11 @@ package groupproject.apgroupproject.services;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-public class SceneSwitcher {
+public class SceneSwitcher implements NavigationService {
 
     public static void switchTo(Stage stage, String fxmlFileName) {
         try {
@@ -20,5 +21,10 @@ public class SceneSwitcher {
             System.err.println("Failed to load scene: " + fxmlFileName);
             e.printStackTrace();
         }
+    }
+
+    public void navigateTo(String fxmlFileName, Button sourceButton) {
+        Stage stage = (Stage) sourceButton.getScene().getWindow();
+        SceneSwitcher.switchTo(stage, fxmlFileName);
     }
 }

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="groupproject.apgroupproject.controllers.AccountSettingsController">
    
    <!-- SIDEBAR -->
    <left>
@@ -78,15 +78,15 @@
             <Region VBox.vgrow="ALWAYS" />
             
             <!-- NEW PROFILE BUTTON (Replaces Admin Login) -->
-            <Button fx:id="myProfileButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-border-color: white; -fx-border-radius: 7;" text="My Profile">
+            <Button fx:id="myProfileButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-border-color: white; -fx-border-radius: 7;" text="My Profile">
                <VBox.margin>
-                  <Insets bottom="0.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
                </VBox.margin>
                <padding>
                   <Insets left="20.0" />
                </padding>
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font size="13.0" />
                </font>
             </Button>
          </children>

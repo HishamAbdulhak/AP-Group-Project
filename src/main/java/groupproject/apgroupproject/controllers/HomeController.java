@@ -1,5 +1,6 @@
 package groupproject.apgroupproject.controllers;
 
+import groupproject.apgroupproject.services.NavigationService;
 import groupproject.apgroupproject.services.SceneSwitcher;
 import groupproject.apgroupproject.models.UserSession;
 import javafx.fxml.FXML;
@@ -8,21 +9,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class HomeController {
-
-    //Connecting sidebar SceneBuilder fx:id tags with in-code buttons
-    @FXML
-    private Button homeButton;
-    @FXML
-    private Button aiChatButton;
-    @FXML
-    private Button browseButton;
-    @FXML
-    private Button myProfileButton;
-    @FXML
-    //Unseen unless user is admin
-    private Button adminDashboard;
-
+public class HomeController extends BaseController {
     //Connecting main content SceneBuilder fx:id tags with in-code buttons
     @FXML
     private TextField questionText;
@@ -55,61 +42,47 @@ public class HomeController {
     @FXML
     private Hyperlink clubOptions;
 
+    public HomeController() {
+        this.navService = new SceneSwitcher();
+    }
     @FXML
     public void initialize() {
-
-        //Scene changing when pressing sidebar buttons
-        aiChatButton.setOnAction(e -> navigateTo("AIChat.fxml"));
-        browseButton.setOnAction(e -> navigateTo("BrowserPage.fxml"));
-        myProfileButton.setOnAction(e -> navigateTo("AccountSettings.fxml"));
-
-        if(UserSession.isAdmin()){
-            adminDashboard.setVisible(true);
-            adminDashboard.setManaged(true); //Allocates space for button in sidebar
-            adminDashboard.setOnAction(e -> navigateTo("AdminDashboard.fxml"));
-        }
+        super.setupSidebar();
 
         //Implementing the "Ask AI" button
         askAiButton.setOnAction(e -> {
             String question = questionText.getText();
             System.out.println("User Asked: "+ question);
             //TODO: implement passing text to chat controller
-            navigateTo("AIChat.fxml");
+            navService.navigateTo("AIChat.fxml", askAiButton);
         });
 
         //Implementing Quick Access Grid (All go to Browse Page for now)
         //TODO: onAction passes to Document Viewer
-        admissionsButtton.setOnAction(e -> navigateTo("BrowserPage.fxml"));
-        examsAndGrades.setOnAction(e -> navigateTo("BrowserPage.fxml"));
-        campusLife.setOnAction(e -> navigateTo("BrowserPage.fxml"));
-        itSupport.setOnAction(e -> navigateTo("BrowserPage.fxml"));
-        library.setOnAction(e -> navigateTo("BrowserPage.fxml"));
-        financialAid.setOnAction(e -> navigateTo("BrowserPage.fxml"));
+        admissionsButtton.setOnAction(e -> navService.navigateTo("BrowserPage.fxml", admissionsButtton));
+        examsAndGrades.setOnAction(e -> navService.navigateTo("BrowserPage.fxml", examsAndGrades));
+        campusLife.setOnAction(e -> navService.navigateTo("BrowserPage.fxml", campusLife));
+        itSupport.setOnAction(e -> navService.navigateTo("BrowserPage.fxml", itSupport));
+        library.setOnAction(e -> navService.navigateTo("BrowserPage.fxml", library));
+        financialAid.setOnAction(e -> navService.navigateTo("BrowserPage.fxml", financialAid));
 
         //Implementing Trending Questions hyperlinks
         //TODO: onAction passes with predefined questions / actions
         resetStudentEmail.setOnAction(e -> {
             //needs to be passed with predefined question and passed to ai chat
-            navigateTo("AIChat.fxml");
+            navService.navigateTo("AIChat.fxml", aiChatButton);
         });
-        examPDF.setOnAction(e -> navigateTo("BrowserPage.fxml"));
-        campusMap.setOnAction(e -> navigateTo("BrowserPage.fxml"));
+        examPDF.setOnAction(e -> navService.navigateTo("BrowserPage.fxml", aiChatButton));
+        campusMap.setOnAction(e -> navService.navigateTo("BrowserPage.fxml", aiChatButton));
         courseDeadline.setOnAction(e -> {
             //needs to be passed with predefined questions and passed to ai chat
-            navigateTo("AIChat.fxml");
+            navService.navigateTo("AIChat.fxml", aiChatButton);
         });
         clubOptions.setOnAction(e -> {
             //needs to be passed with predefined questions and passed to ai chat
-            navigateTo("AIChat.fxml");
+            navService.navigateTo("AIChat.fxml", aiChatButton);
         });
 
-    }
-
-    //Helper Method to reduce repetitive code
-    private void navigateTo(String fxmlFile) {
-        // Get the stage from one of the buttons that definitely exists
-        Stage stage = (Stage) aiChatButton.getScene().getWindow();
-        SceneSwitcher.switchTo(stage, fxmlFile);
     }
 
 }
