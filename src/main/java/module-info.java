@@ -1,6 +1,8 @@
 module groupproject.apgroupproject {
     requires javafx.controls;
     requires javafx.fxml;
+    requires langchain4j.core;
+    requires langchain4j.open.ai;
 
 
     opens groupproject.apgroupproject to javafx.fxml;
