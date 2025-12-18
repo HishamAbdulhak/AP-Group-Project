@@ -1,7 +1,9 @@
 package groupproject.apgroupproject.controllers;
 
 import groupproject.apgroupproject.models.UserSession;
+import groupproject.apgroupproject.services.IngestionService;
 import groupproject.apgroupproject.services.NavigationService;
+import groupproject.apgroupproject.services.RAGService;
 import groupproject.apgroupproject.services.SceneSwitcher;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,6 +11,12 @@ import javafx.scene.control.Button;
 // Abstract class because we never use it directly, other controllers extend it
 public abstract class BaseController {
 
+    protected static final RAGService.RagService ragService = new RAGService.RagService();
+
+    protected static final IngestionService ingestionService = new IngestionService(
+            ragService.getEmbeddingModel(),
+            ragService.getEmbeddingStore()
+    );
     // These IDs must match the FXML in EVERY file (Home, Chat, Browser, etc.)
     @FXML protected Button homeButton;
     @FXML protected Button aiChatButton;
@@ -44,6 +52,10 @@ public abstract class BaseController {
             } else {
                 adminDashboard.setVisible(false);
                 adminDashboard.setManaged(false);}
+
+        RAGService RAGService = new RAGService();
+
+
 
     }
 
