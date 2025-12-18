@@ -114,7 +114,7 @@
             <!-- Search Bar -->
             <HBox prefHeight="45.0" prefWidth="200.0">
                <children>
-                  <TextField promptText="Filter topics by keyword..." style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" HBox.hgrow="ALWAYS">
+                  <TextField fx:id="searchField" promptText="Filter topics by keyword..." style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -125,13 +125,13 @@
             <!-- The Accordion List -->
             <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: transparent; -fx-background: transparent;" VBox.vgrow="ALWAYS">
                <content>
-                  <Accordion style="-fx-background-color: transparent;">
+                  <Accordion fx:id="categoryAccordion" style="-fx-background-color: transparent;">
                      <panes>
 
                         <!-- Category 1: Admissions -->
                         <TitledPane animated="false" text="Admissions &amp; Registration">
                            <content>
-                              <VBox spacing="10.0">
+                              <VBox fx:id="admissionsBox" spacing="10.0">
                                  <children>
                                     <Hyperlink text="How do I apply for a Student ID card?" textFill="#2980b9">
                                        <font>
@@ -162,7 +162,7 @@
                         <!-- Category 3: Campus Life -->
                         <TitledPane animated="false" text="Campus Facilities">
                            <content>
-                              <VBox spacing="10.0">
+                              <VBox fx:id="campusBox" spacing="10.0">
                                  <children>
                                     <Hyperlink text="View Campus Map and Parking Zones" textFill="#2980b9">
                                        <font>
@@ -193,7 +193,7 @@
                         <!-- Category 2: Exams -->
                         <TitledPane animated="false" text="Examinations &amp; Grading">
                            <content>
-                              <VBox spacing="10.0">
+                              <VBox fx:id="examsBox" spacing="10.0">
                                  <children>
                                     <Hyperlink text="Download the Fall 2025 Exam Schedule (PDF)" textFill="#2980b9">
                                        <font>

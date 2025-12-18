@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.IOException;
+import javafx.scene.Node;
 
 public class SceneSwitcher implements NavigationService {
 
@@ -23,8 +24,8 @@ public class SceneSwitcher implements NavigationService {
         }
     }
 
-    public void navigateTo(String fxmlFileName, Button sourceButton) {
-        Stage stage = (Stage) sourceButton.getScene().getWindow();
+    public void navigateTo(String fxmlFileName, Node node) {
+        Stage stage = (Stage) node.getScene().getWindow();
         SceneSwitcher.switchTo(stage, fxmlFileName);
     }
 }
