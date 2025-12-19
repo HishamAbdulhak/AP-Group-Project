@@ -1,5 +1,6 @@
 package groupproject.apgroupproject.controllers;
 
+import groupproject.apgroupproject.models.UserSession; // Import UserSession
 import javafx.fxml.FXML;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Hyperlink;
@@ -9,7 +10,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.File;
 
-public class BrowserController extends BaseController{
+public class BrowserController extends BaseController {
 
     @FXML private TextField searchField;
     @FXML private VBox admissionsBox;
@@ -17,7 +18,7 @@ public class BrowserController extends BaseController{
     @FXML private VBox examsBox;
     @FXML private Accordion categoryAccordion;
 
-    //Fallback container for "Other" files
+    // Fallback container for "Other" files
     private VBox othersBox;
 
     @FXML
@@ -26,10 +27,53 @@ public class BrowserController extends BaseController{
         createOthersBox();
         refreshFileList("");
 
+        // 1. Search Logic
         if (searchField != null) {
             searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-                refreshFileList(newValue.toLowerCase());;
+                refreshFileList(newValue.toLowerCase());
             });
+        }
+
+        // 2. Check for "Quick Access" category from Home Screen
+        String category = UserSession.getInstance().getDocumentCategoryAndClear();
+        if (category != null) {
+            handleCategoryFilter(category);
+        }
+    }
+
+    private void handleCategoryFilter(String category) {
+        if (categoryAccordion == null) return;
+
+        VBox targetBox = null;
+
+        // Map the button names to the correct VBox
+        switch (category) {
+            case "Admissions":
+            case "Financial Aid": // 'Fee' keywords are in admissionsBox
+                targetBox = admissionsBox;
+                break;
+            case "Exams":
+                targetBox = examsBox;
+                break;
+            case "Campus Life":
+            case "Library":       // 'Library' keywords are in campusBox
+                targetBox = campusBox;
+                break;
+            case "IT Support":
+                targetBox = othersBox;
+                break;
+            default:
+                targetBox = othersBox;
+        }
+
+        // Find the TitledPane that holds this VBox and expand it
+        if (targetBox != null) {
+            for (TitledPane pane : categoryAccordion.getPanes()) {
+                if (pane.getContent() == targetBox) {
+                    categoryAccordion.setExpandedPane(pane);
+                    break;
+                }
+            }
         }
     }
 
@@ -37,6 +81,7 @@ public class BrowserController extends BaseController{
         othersBox = new VBox(10);
         othersBox.setStyle("-fx-padding: 15;");
 
+        // FIX: Ensure this pane is added to the accordion logic
         TitledPane othersPane = new TitledPane("Other Documents" , othersBox);
 
         if (categoryAccordion != null){
@@ -73,7 +118,6 @@ public class BrowserController extends BaseController{
         }
 
         if (othersBox != null) othersBox.getChildren().add(link);
-
     }
 
     private void refreshFileList(String query) {
