@@ -12,12 +12,10 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="groupproject.apgroupproject.controllers.ChatController">
-   
-   <!-- SIDEBAR Navigation -->
+
    <left>
       <VBox prefHeight="768.0" prefWidth="192.0" style="-fx-background-color: #2C3E50;" BorderPane.alignment="CENTER">
          <children>
-            <!-- App Title -->
             <Label text="UniHelp AI" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
@@ -26,8 +24,7 @@
                   <Insets bottom="30.0" left="20.0" top="30.0" />
                </VBox.margin>
             </Label>
-            
-            <!-- Home Button (Inactive) -->
+
             <Button fx:id="homeButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="46.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text="Home">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" />
@@ -39,8 +36,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            
-            <!-- AI Chat Button (ACTIVE - Has White Border) -->
+
             <Button fx:id="aiChatButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="46.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-border-color: white; -fx-border-radius: 7; -fx-border-width: 1;" text="AI Chat">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" />
@@ -52,8 +48,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            
-            <!-- Browse Topics Button -->
+
             <Button fx:id="browseButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="46.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text="Browse Topics">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" />
@@ -65,6 +60,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
+
             <Button fx:id="adminDashboard" managed="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="46.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text="Admin Dashboard" visible="false">
                <padding>
                   <Insets left="20.0" />
@@ -76,9 +72,9 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" />
                </VBox.margin>
             </Button>
-            
-            <!-- Spacer -->
+
             <Region VBox.vgrow="ALWAYS" />
+
             <Button fx:id="myProfileButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: transparent; -fx-text-fill: #ecf0f1; -fx-alignment: CENTER_LEFT; -fx-cursor: hand;" text="My Profile">
                <padding>
                   <Insets left="20.0" />
@@ -93,12 +89,10 @@
          </children>
       </VBox>
    </left>
-   
-   <!-- MAIN CHAT AREA -->
+
    <center>
       <BorderPane BorderPane.alignment="CENTER">
-         
-         <!-- Chat Header -->
+
          <top>
             <VBox BorderPane.alignment="CENTER">
                <children>
@@ -110,23 +104,20 @@
                         <Insets bottom="20.0" left="30.0" right="30.0" top="30.0" />
                      </padding>
                   </Label>
-                  <!-- Divider Line -->
                   <Region prefHeight="1.0" style="-fx-background-color: #ecf0f1;" />
                </children>
             </VBox>
          </top>
-         
-         <!-- Chat History (Messages) -->
+
          <center>
-            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: transparent; -fx-background: #FFFFFF;" BorderPane.alignment="CENTER">
+            <ScrollPane fx:id="chatScrollPane" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: transparent; -fx-background: #FFFFFF;" BorderPane.alignment="CENTER">
                <content>
-                  <VBox id="messageContainer" spacing="20.0">
+                  <VBox fx:id="messageContainer" spacing="20.0">
                      <padding>
                         <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                      </padding>
                      <children>
-                        
-                        <!-- AI Greeting (Left) -->
+
                         <HBox>
                            <children>
                               <VBox maxWidth="600.0" style="-fx-background-color: #ecf0f1; -fx-background-radius: 15 15 15 0; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 3, 0, 0, 1);">
@@ -143,87 +134,26 @@
                               </VBox>
                            </children>
                         </HBox>
-                        
-                        <!-- User Message (Right) -->
-                        <HBox alignment="CENTER_RIGHT">
-                           <children>
-                              <Label maxWidth="500.0" style="-fx-background-color: #3498db; -fx-background-radius: 15 15 0 15; -fx-text-fill: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 3, 0, 0, 1);" text="How do I register for courses?" wrapText="true">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                 </padding>
-                              </Label>
-                           </children>
-                        </HBox>
-                        
-                        <!-- AI Response with Citation (Left) -->
-                        <HBox>
-                           <children>
-                              <VBox maxWidth="600.0" spacing="8.0" style="-fx-background-color: #ecf0f1; -fx-background-radius: 15 15 15 0; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 3, 0, 0, 1);">
-                                 <padding>
-                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                 </padding>
-                                 <children>
-                                    <Label text="To register for courses, log in to the student portal and navigate to the 'Course Registration' section. Registration opens next week." wrapText="true">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    
-                                    <!-- Citation -->
-                                    <Label text="Source: Student Handbook, p. 12" textFill="#7f8c8d">
-                                       <font>
-                                          <Font name="System Italic" size="12.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets top="5.0" />
-                                       </padding>
-                                    </Label>
-                                    
-                                    <!-- Feedback Buttons -->
-                                    <HBox spacing="10.0">
-                                       <children>
-                                          <Button mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-cursor: hand;" text="👍">
-                                             <font>
-                                                <Font size="10.0" />
-                                             </font>
-                                          </Button>
-                                          <Button mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-cursor: hand;" text="👎">
-                                             <font>
-                                                <Font size="10.0" />
-                                             </font>
-                                          </Button>
-                                       </children>
-                                       <padding>
-                                          <Insets top="5.0" />
-                                       </padding>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        
+
                      </children>
                   </VBox>
                </content>
             </ScrollPane>
          </center>
-         
-         <!-- Bottom Input Area -->
+
          <bottom>
             <HBox alignment="CENTER" spacing="15.0" style="-fx-background-color: white; -fx-border-color: #ecf0f1; -fx-border-width: 1 0 0 0;" BorderPane.alignment="CENTER">
                <padding>
                   <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
                </padding>
                <children>
-                  <TextField promptText="Ask a follow-up question..." style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #bdc3c7; -fx-padding: 10 15;" HBox.hgrow="ALWAYS">
+                  <TextField fx:id="chatInput" promptText="Ask a follow-up question..." style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #bdc3c7; -fx-padding: 10 15;" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Button mnemonicParsing="false" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 20; -fx-cursor: hand;" text="Send">
+
+                  <Button fx:id="sendButton" mnemonicParsing="false" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 20; -fx-cursor: hand;" text="Send">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -234,7 +164,7 @@
                </children>
             </HBox>
          </bottom>
-         
+
       </BorderPane>
    </center>
 </BorderPane>

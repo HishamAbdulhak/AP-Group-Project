@@ -8,13 +8,15 @@ import groupproject.apgroupproject.services.SceneSwitcher;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-// Abstract class because we never use it directly, other controllers extend it
 public abstract class BaseController {
 
+    // Static services allow data to persist across all screens
     protected static RAGService.RagService ragService;
     protected static IngestionService ingestionService;
 
-    // These IDs must match the FXML in EVERY file (Home, Chat, Browser, etc.)
+    // Flag to track if the AI has finished loading documents
+    public static boolean isAiReady = false;
+
     @FXML protected Button homeButton;
     @FXML protected Button aiChatButton;
     @FXML protected Button browseButton;
@@ -26,6 +28,7 @@ public abstract class BaseController {
     public BaseController() {
         this.navService = new SceneSwitcher();
 
+        // Initialize AI Services only once when the app starts
         if (ragService == null) {
             try {
                 System.out.println("Initializing AI Services...");
@@ -35,20 +38,34 @@ public abstract class BaseController {
                         ragService.getEmbeddingModel(),
                         ragService.getEmbeddingStore()
                 );
+
+                // Run Ingestion in a Background Thread
+                // This prevents the application from freezing on startup
+                if (!isAiReady) {
+                    Thread backgroundThread = new Thread(() -> {
+                        System.out.println("App Started. Loading AI Brain in background...");
+
+                        // Load all documents from the folder
+                        ingestionService.ingestAllFiles("project_documents");
+
+                        // Mark as ready so ChatController knows it can proceed
+                        isAiReady = true;
+                        System.out.println("AI is Ready to Chat!");
+                    });
+
+                    backgroundThread.start();
+                }
+
                 System.out.println("AI Services started successfully.");
 
             } catch (Exception e) {
-                // If it fails (e.g., missing API Key), print error BUT DO NOT CRASH.
                 System.err.println("CRITICAL WARNING: AI Services failed to start.");
                 System.err.println("Reason: " + e.getMessage());
-                System.err.println("The app will run, but AI features will be broken until you fix the API Key.");
+                e.printStackTrace();
             }
         }
     }
 
-
-
-    // This method sets up the sidebar actions
     protected void setupSidebar() {
         if (homeButton != null)
             homeButton.setOnAction(e -> navService.navigateTo("HomeScreen.fxml", homeButton));
@@ -62,19 +79,15 @@ public abstract class BaseController {
         if (myProfileButton != null)
             myProfileButton.setOnAction(e -> navService.navigateTo("AccountSettings.fxml", myProfileButton));
 
-        if (adminDashboard != null)
-            if (UserSession.isAdmin()) {
+        if (adminDashboard != null) {
+            if (UserSession.getInstance().isAdmin()) {
                 adminDashboard.setVisible(true);
                 adminDashboard.setManaged(true);
                 adminDashboard.setOnAction(e -> navService.navigateTo("AdminDashboard.fxml", adminDashboard));
             } else {
                 adminDashboard.setVisible(false);
-                adminDashboard.setManaged(false);}
-
-        RAGService RAGService = new RAGService();
-
-
-
+                adminDashboard.setManaged(false);
+            }
+        }
     }
-
 }

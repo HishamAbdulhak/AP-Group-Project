@@ -1,49 +1,75 @@
 package groupproject.apgroupproject.models;
 
 public class UserSession {
-    //Class used to differentiate between different levels of users, students and admins.
 
-    //Static variables hold data globally as long as the app is running
-    private static String currentId;
-    private static String currentName;
-    private static String currentEmail;
-    private static String currentPassword;
+    private static UserSession instance;
 
-    //Tracks if the logged-in user is an Admin
-    private static boolean isAdmin = false;
+    // User Data
+    private String id;
+    private String name;
+    private String email;
+    private String password;
+    private boolean isAdmin;
 
-    //Start a Session (Called on Login)
-    public static void startSession(String id, String name, String email, String pass, boolean adminParams) {
-        currentId = id;
-        currentName = name;
-        currentEmail = email;
-        currentPassword = pass;
-        isAdmin = adminParams; // true = Admin, false = Student
+    // Navigation Data (Temporary Storage)
+    private String pendingQuestion;
+    private String documentCategory; // <--- NEW FIELD
+
+    private UserSession(String id, String name, String email, String password, boolean isAdmin) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.isAdmin = isAdmin;
     }
 
-    //End a Session (Called on Logout)
+    public static void startSession(String id, String name, String email, String password, boolean isAdmin) {
+        instance = new UserSession(id, name, email, password, isAdmin);
+    }
+
+    public static UserSession getInstance() {
+        if (instance == null) {
+            System.out.println("Warning: UserSession is null");
+        }
+        return instance;
+    }
+
     public static void cleanSession() {
-        currentId = null;
-        currentName = null;
-        currentEmail = null;
-        currentPassword = null;
-        isAdmin = false; // Reset to default
+        instance = null;
     }
 
-    //Getters
-    public static String getId() {
-        return currentId;
+    // --- Getters ---
+    public String getId() { return id; }
+    public String getName() { return name; }
+    public String getEmail() { return email; }
+    public String getPassword() { return password; }
+    public boolean isAdmin() { return isAdmin; }
+
+    // --- Pending Question Logic (Dashboard -> Chat) ---
+    public void setPendingQuestion(String question) {
+        this.pendingQuestion = question;
     }
-    public static String getName() {
-        return currentName;
+
+    public String getPendingQuestionAndClear() {
+        String temp = this.pendingQuestion;
+        this.pendingQuestion = null;
+        return temp;
     }
-    public static String getEmail() {
-        return currentEmail;
+
+    // --- NEW: Document Category Logic (Dashboard -> Browser) ---
+    // This fixes "Cannot resolve method 'setDocumentCategory'"
+    public void setDocumentCategory(String category) {
+        this.documentCategory = category;
     }
-    public static String getPassword() {
-        return currentPassword;
+
+    public String getDocumentCategory() {
+        return documentCategory;
     }
-    public static boolean isAdmin() {
-        return isAdmin;
+
+    // Optional: Use this if you want the filter to reset after one use
+    public String getDocumentCategoryAndClear() {
+        String temp = this.documentCategory;
+        this.documentCategory = null;
+        return temp;
     }
 }

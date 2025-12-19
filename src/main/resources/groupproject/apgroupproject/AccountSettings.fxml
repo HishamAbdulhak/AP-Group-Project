@@ -139,13 +139,13 @@
                               <VBox spacing="5.0" HBox.hgrow="ALWAYS">
                                  <children>
                                     <Label text="Full Name" textFill="#7f8c8d" />
-                                    <TextField promptText="John Doe" style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-padding: 8;" />
+                                    <TextField fx:id="fullNameField" promptText="John Doe" style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-padding: 8;" />
                                  </children>
                               </VBox>
                               <VBox spacing="5.0" HBox.hgrow="ALWAYS">
                                  <children>
                                     <Label text="Email Address" textFill="#7f8c8d" />
-                                    <TextField promptText="john.doe@university.edu" style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-padding: 8;" />
+                                    <TextField fx:id="emailField" promptText="john.doe@university.edu" style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-padding: 8;" />
                                  </children>
                               </VBox>
                            </children>
@@ -176,8 +176,8 @@
                                  </VBox.margin>
                               </Label>
                             <HBox spacing="10.0">
-                                <PasswordField promptText="New Password" style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-padding: 8;" HBox.hgrow="ALWAYS" />
-                                <PasswordField promptText="Confirm Password" style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-padding: 8;" HBox.hgrow="ALWAYS" />
+                                <PasswordField fx:id="passwordField" promptText="New Password" style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-padding: 8;" HBox.hgrow="ALWAYS" />
+                                <PasswordField fx:id="passwordField" promptText="Confirm Password" style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-padding: 8;" HBox.hgrow="ALWAYS" />
                             </HBox>
                         </VBox>
                      </children>
@@ -192,7 +192,7 @@
                   <HBox alignment="CENTER_RIGHT" spacing="15.0">
                      <children>
                         <Button fx:id="logOut" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #e74c3c; -fx-cursor: hand;" text="Log Out" />
-                        <Button fx:id="saveChanges" mnemonicParsing="false" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;" text="Save Changes">
+                        <Button fx:id="saveButton" mnemonicParsing="false" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;" text="Save Changes">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

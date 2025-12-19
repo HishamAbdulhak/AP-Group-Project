@@ -9,7 +9,6 @@ import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.store.embedding.EmbeddingStoreIngestor;
 import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.store.embedding.EmbeddingStore;
-
 import java.io.File;
 import java.util.List;
 
@@ -42,6 +41,30 @@ public class IngestionService {
                 .build();
 
         ingestor.ingest(doc);
+    }
+
+    public void ingestAllFiles(String folderPath) {
+        File folder = new File(folderPath);
+        if (!folder.exists() || !folder.isDirectory()) return;
+
+        File[] files = folder.listFiles();
+        if (files == null) return;
+
+        System.out.println("Starting Bulk Ingestion from: " + folderPath);
+        int count = 0;
+        for (File file : files) {
+            String name = file.getName().toLowerCase();
+            if (name.endsWith(".pdf") || name.endsWith(".docx") || name.endsWith(".txt")) {
+                try {
+                    ingestFile(file); // Re-use your existing single-file logic
+                    System.out.println("   - Ingested: " + file.getName());
+                    count++;
+                } catch (Exception e) {
+                    System.err.println("    Failed to ingest: " + file.getName());
+                }
+            }
+        }
+        System.out.println(" Bulk Ingestion Complete. Loaded " + count + " documents.");
     }
 
 }

@@ -1,6 +1,7 @@
 package groupproject.apgroupproject.controllers;
 
 import groupproject.apgroupproject.models.DocumentsMetadata;
+import groupproject.apgroupproject.services.AppLogger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -175,6 +176,7 @@ public class AdminController extends BaseController {
             updateDashboardStats();
 
             System.out.println("Success! File saved to: " + destFile.getAbsolutePath());
+            AppLogger.info("File uploaded: " + sourceFile.getName());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -183,6 +185,8 @@ public class AdminController extends BaseController {
     }
 
     //This adds file persistence, the files will all load when the app is re-opened.
+    // In AdminController.java
+
     private void loadExistingFile() {
         File folder = new File("project_documents");
 
@@ -191,18 +195,19 @@ public class AdminController extends BaseController {
 
             if (files != null) {
                 for (File file : files) {
+                    //Validation
                     String name = file.getName().toLowerCase();
                     if (name.endsWith(".pdf") || name.endsWith(".docx") || name.endsWith(".txt")) {
 
+                        //Add to UI Table (Existing code)
                         LocalDate fileDate = java.time.Instant.ofEpochMilli(file.lastModified())
                                 .atZone(java.time.ZoneId.systemDefault())
                                 .toLocalDate();
-
                         DocumentsMetadata metadata = new DocumentsMetadata(file.getName(), fileDate, "Stored");
                         filesTable.getItems().add(metadata);
                     }
                 }
-                // Update stats once after loading all files
+                // Update stats
                 updateDashboardStats();
             }
         }

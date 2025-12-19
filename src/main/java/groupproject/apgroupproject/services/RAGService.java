@@ -12,6 +12,11 @@ import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
 import dev.langchain4j.service.AiServices;
 import dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore;
 import groupproject.apgroupproject.models.AiConfig;
+import dev.langchain4j.service.SystemMessage;
+import dev.langchain4j.rag.DefaultRetrievalAugmentor;
+import dev.langchain4j.rag.RetrievalAugmentor;
+import dev.langchain4j.rag.content.injector.DefaultContentInjector;
+import java.util.List;
 
 public class RAGService {
 
@@ -26,6 +31,15 @@ public class RAGService {
 
 
         public interface Assistant {
+            @SystemMessage({
+                    "You are a helpful university student support assistant.",
+                    "The documents you read have a 'file_name' attached to them.",
+                    "Answer the user's question using ONLY the information provided.",
+                    "If you find the answer, end your response with exactly:",
+                    "'Reference: [insert file_name here]'",
+                    "Do not use brackets in the final output, just the filename.",
+                    "If the answer is not in the context, say: 'I'm sorry, I don't have information about that in my documents.'"
+            })
             String chat(String userMessage);
         }
 
@@ -51,12 +65,19 @@ public class RAGService {
                     .embeddingStore(embeddingStore)
                     .embeddingModel(embeddingModel)
                     .maxResults(3) // Number of chunks to retrieve
-                    .minScore(0.7) // Similarity threshold
+                    .minScore(0.6) // Similarity threshold
+                    .build();
+
+            RetrievalAugmentor augmentor = DefaultRetrievalAugmentor.builder()
+                    .contentRetriever(contentRetriever)
+                    .contentInjector(DefaultContentInjector.builder()
+                            .metadataKeysToInclude(List.of("file_name"))
+                            .build())
                     .build();
 
             this.assistant = AiServices.builder(Assistant.class)
                     .chatLanguageModel(chatModel)
-                    .contentRetriever(contentRetriever)
+                    .retrievalAugmentor(augmentor)
                     .chatMemory(MessageWindowChatMemory.withMaxMessages(10))
                     .build();
         }
