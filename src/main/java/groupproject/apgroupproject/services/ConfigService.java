@@ -8,7 +8,7 @@ public class ConfigService {
     private static final double DEFAULT_TEMPERATURE = 0.2;
 
     public AiConfig loadAiConfig() {
-        String apiKey = System.getenv("OPENAI_API_KEY");
+        String apiKey = "OPENAI_API_KEY";
 
         if (apiKey == null || apiKey.isBlank()) {
             throw new IllegalStateException(
