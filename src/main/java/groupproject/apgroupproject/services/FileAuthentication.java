@@ -69,7 +69,7 @@ public class FileAuthentication implements AuthenticationService {
         return false;
     }
 
-    // 3. Register New Student
+    // 3. Register New Student (FIXED)
     @Override
     public boolean register(String id, String name, String email, String password, String securityCode) {
         if (isStudentIdTaken(id)) {
@@ -77,9 +77,18 @@ public class FileAuthentication implements AuthenticationService {
         }
 
         try (FileWriter fw = new FileWriter(studentFile, true);
-             BufferedWriter bw = new BufferedWriter(fw);
-             PrintWriter out = new PrintWriter(bw)) {
-            out.println(id + "," + name + "," + email + "," + password + "," + securityCode);
+             BufferedWriter bw = new BufferedWriter(fw)) {
+
+            // FIX: Check if file has content. If so, start on a new line first.
+            // This prevents the new user from being attached to the end of the previous line.
+            if (studentFile.length() > 0) {
+                bw.newLine();
+            }
+
+            // Write the data (ID, Name, Email, Password, SecurityCode)
+            // We DO NOT add a newline at the end, so the file stops exactly at the last character.
+            bw.write(id + "," + name + "," + email + "," + password + "," + securityCode);
+
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -115,6 +124,7 @@ public class FileAuthentication implements AuthenticationService {
 
                 // Format: ID(0), Name(1), Email(2), Pass(3), Code(4)
                 if (parts.length >= 5 && parts[0].trim().equals(id) && parts[4].trim().equals(securityCode)) {
+                    // Update Password. Keep others same.
                     line = parts[0] + "," + parts[1] + "," + parts[2] + "," + newPassword + "," + parts[4];
                     found = true;
                 }
@@ -164,7 +174,7 @@ public class FileAuthentication implements AuthenticationService {
         return "student@uni.edu";
     }
 
-    // 7. Update Student Profile (This was missing)
+    // 7. Update Student Profile
     @Override
     public boolean updateStudentProfile(String id, String newName, String newEmail, String newPassword) {
         List<String> lines = new ArrayList<>();
@@ -197,8 +207,11 @@ public class FileAuthentication implements AuthenticationService {
     // Helper method to write list of lines back to file
     private boolean writeLinesToFile(List<String> lines) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(studentFile))) {
-            for (String line : lines) {
-                pw.println(line);
+            for (int i = 0; i < lines.size(); i++) {
+                pw.print(lines.get(i));
+                if (i < lines.size() - 1) {
+                    pw.println(); // Add newline only between items, not at the very end
+                }
             }
             return true;
         } catch (IOException e) {
