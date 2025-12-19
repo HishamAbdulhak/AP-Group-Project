@@ -11,6 +11,7 @@ import dev.langchain4j.rag.content.retriever.ContentRetriever;
 import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
 import dev.langchain4j.service.AiServices;
 import dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore;
+import groupproject.apgroupproject.models.AiConfig;
 
 public class RAGService {
 
@@ -30,17 +31,20 @@ public class RAGService {
 
         public RagService() {
 
+            ConfigService configService = new ConfigService();
+            AiConfig config = configService.loadAiConfig();
+
             this.embeddingStore = new InMemoryEmbeddingStore<>();
 
-
             this.embeddingModel = OpenAiEmbeddingModel.builder()
-                    .apiKey("demo")
-                    .modelName("text-embedding-3-small")
+                    .apiKey(config.getApiKey())
+                    .modelName(config.getEmbeddingModel())
                     .build();
 
             ChatLanguageModel chatModel = OpenAiChatModel.builder()
-                    .apiKey("demo")
-                    .modelName("gpt-3.5-turbo")
+                    .apiKey(config.getApiKey())
+                    .modelName(config.getChatModel())
+                    .temperature(config.getTemperature())
                     .build();
 
             ContentRetriever contentRetriever = EmbeddingStoreContentRetriever.builder()

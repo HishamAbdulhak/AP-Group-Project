@@ -15,7 +15,7 @@ public class BrowserController extends BaseController{
     @FXML private VBox admissionsBox;
     @FXML private VBox campusBox;
     @FXML private VBox examsBox;
-    @FXML private Accordion catagoryAccordion;
+    @FXML private Accordion categoryAccordion;
 
     //Fallback container for "Other" files
     private VBox othersBox;
@@ -28,7 +28,7 @@ public class BrowserController extends BaseController{
 
         if (searchField != null) {
             searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-                refreshFileList(newValue);
+                refreshFileList(newValue.toLowerCase());;
             });
         }
     }
@@ -39,13 +39,13 @@ public class BrowserController extends BaseController{
 
         TitledPane othersPane = new TitledPane("Other Documents" , othersBox);
 
-        if (catagoryAccordion != null){
-            catagoryAccordion.getPanes().add(othersPane);
+        if (categoryAccordion != null){
+            categoryAccordion.getPanes().add(othersPane);
         }
     }
 
     private void sortFileIntoCategory(File file, String nameLower) {
-        Hyperlink link = new Hyperlink(file.getName());
+        Hyperlink link = createFileLink(file);
 
         if (nameLower.contains("exam") || nameLower.contains("grade") ||
                 nameLower.contains("test") || nameLower.contains("result") ||

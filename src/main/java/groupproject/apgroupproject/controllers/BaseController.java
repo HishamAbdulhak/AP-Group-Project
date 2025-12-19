@@ -11,12 +11,9 @@ import javafx.scene.control.Button;
 // Abstract class because we never use it directly, other controllers extend it
 public abstract class BaseController {
 
-    protected static final RAGService.RagService ragService = new RAGService.RagService();
+    protected static RAGService.RagService ragService;
+    protected static IngestionService ingestionService;
 
-    protected static final IngestionService ingestionService = new IngestionService(
-            ragService.getEmbeddingModel(),
-            ragService.getEmbeddingStore()
-    );
     // These IDs must match the FXML in EVERY file (Home, Chat, Browser, etc.)
     @FXML protected Button homeButton;
     @FXML protected Button aiChatButton;
@@ -28,7 +25,28 @@ public abstract class BaseController {
 
     public BaseController() {
         this.navService = new SceneSwitcher();
+
+        if (ragService == null) {
+            try {
+                System.out.println("Initializing AI Services...");
+                ragService = new RAGService.RagService();
+
+                ingestionService = new IngestionService(
+                        ragService.getEmbeddingModel(),
+                        ragService.getEmbeddingStore()
+                );
+                System.out.println("AI Services started successfully.");
+
+            } catch (Exception e) {
+                // If it fails (e.g., missing API Key), print error BUT DO NOT CRASH.
+                System.err.println("CRITICAL WARNING: AI Services failed to start.");
+                System.err.println("Reason: " + e.getMessage());
+                System.err.println("The app will run, but AI features will be broken until you fix the API Key.");
+            }
+        }
     }
+
+
 
     // This method sets up the sidebar actions
     protected void setupSidebar() {

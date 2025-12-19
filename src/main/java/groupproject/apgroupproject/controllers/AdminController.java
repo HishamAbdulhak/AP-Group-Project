@@ -148,6 +148,16 @@ public class AdminController extends BaseController {
                     StandardCopyOption.REPLACE_EXISTING
             );
 
+            if (ingestionService != null) {
+                try {
+                    System.out.println("Ingesting file into AI Memory: " + destFile.getName());
+                    ingestionService.ingestFile(destFile); // <--- THIS MAKES THE AI SMART
+                    System.out.println("Ingestion Successful!");
+                } catch (Exception e) {
+                    System.err.println("AI Ingestion Failed (Chat won't know this file): " + e.getMessage());
+                }
+            }
+
             //Resets file modify time to NOW so "Last Update Time" can be measured accurately
             destFile.setLastModified(System.currentTimeMillis());
 

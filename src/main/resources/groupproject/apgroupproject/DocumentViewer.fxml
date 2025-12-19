@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="groupproject.apgroupproject.controllers.DocumentViewerController">
    
    <!-- SIDEBAR (Consistent Navigation) -->
    <left>
@@ -100,19 +100,19 @@
                   <Insets left="20.0" right="20.0" />
                </padding>
                <children>
-                  <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #7f8c8d; -fx-cursor: hand;" text="← Back">
+                  <Button fx:id="backButton" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #7f8c8d; -fx-cursor: hand;" text="← Back">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
                   <Separator orientation="VERTICAL" />
-                  <Label text="Student_Handbook_2025.pdf" textFill="#2c3e50">
+                  <Label fx:id="fileNameLabel" text="Student_Handbook_2025.pdf" textFill="#2c3e50">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" style="-fx-background-color: #ecf0f1; -fx-cursor: hand;" text="Download PDF" />
+                  <Button fx:id="downloadButton" mnemonicParsing="false" style="-fx-background-color: #ecf0f1; -fx-cursor: hand;" text="Download PDF" />
                </children>
             </HBox>
             <Label prefHeight="45.0" prefWidth="316.0" text="Document Viewer">
@@ -136,15 +136,7 @@
                               <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                            </padding>
                            <children>
-                              <Label text="Chapter 2: Course Registration" textFill="#2c3e50">
-                                 <font>
-                                    <Font name="System Bold" size="24.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="20.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <TextArea editable="false" prefHeight="800.0" prefWidth="700.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="2.1 General Guidelines&#10;&#10;All students must register for courses during the designated registration period. Late registration is subject to a penalty fee of RM 50 per day.&#10;&#10;To register:&#10;1. Log in to the Student Portal.&#10;2. Navigate to the 'My Academics' tab.&#10;3. Select 'Course Registration'.&#10;&#10;Please ensure you have cleared all outstanding fees before attempting to register. If you encounter any technical issues, please contact the IT Helpdesk immediately.&#10;&#10;2.2 Credit Hours&#10;&#10;Undergraduate students must take a minimum of 12 credit hours per semester to maintain full-time status. The maximum load is 20 credit hours." wrapText="true">
+                              <TextArea fx:id="contentArea" editable="false" prefHeight="800.0" prefWidth="700.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" wrapText="true">
                                  <font>
                                     <Font name="Times New Roman" size="16.0" />
                                  </font>
