@@ -139,18 +139,6 @@
                      </HBox.margin>
                      <prefWidth>200.0</prefWidth>
                   </VBox>
-                  <!-- Card 2 -->
-                  <VBox spacing="5.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0); -fx-padding: 20;">
-                     <children>
-                        <Label text="Pending Ingestion" textFill="#7f8c8d" />
-                        <Label text="0" textFill="#27ae60">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <prefWidth>200.0</prefWidth>
-                  </VBox>
                   <!-- Card 3 -->
                   <VBox spacing="5.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0); -fx-padding: 20;">
                      <children>
