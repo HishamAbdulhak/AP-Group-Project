@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SearchLogicTest {
 
-    // Helper method that mimics your BrowserController filtering logic
     private boolean matchesSearch(String filename, String query) {
         if (filename == null) return false;
         if (query == null || query.isEmpty()) return true; // Empty search shows all

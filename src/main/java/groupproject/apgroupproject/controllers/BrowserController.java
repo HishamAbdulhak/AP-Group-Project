@@ -81,7 +81,7 @@ public class BrowserController extends BaseController {
         othersBox = new VBox(10);
         othersBox.setStyle("-fx-padding: 15;");
 
-        // FIX: Ensure this pane is added to the accordion logic
+        //Ensure this pane is added to the accordion logic
         TitledPane othersPane = new TitledPane("Other Documents" , othersBox);
 
         if (categoryAccordion != null){

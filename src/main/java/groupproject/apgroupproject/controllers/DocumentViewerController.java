@@ -1,6 +1,7 @@
 package groupproject.apgroupproject.controllers;
 
 import dev.langchain4j.data.document.Document;
+import groupproject.apgroupproject.models.UserSession;
 import groupproject.apgroupproject.services.AlertService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,10 +20,9 @@ public class DocumentViewerController extends BaseController {
     @FXML private Label fileNameLabel;
     @FXML private TextArea contentArea;
 
-    // Use your custom AlertService for popups
     private final AlertService alertService = new AlertService();
 
-    // The "Bridge": This static variable holds the file passed from the Browser Page
+    //Holds the file passed from the Browser Page
     public static File fileToView;
 
     @FXML
@@ -40,12 +40,16 @@ public class DocumentViewerController extends BaseController {
         }
 
         //Load the File Content
+        String pathFromSession = UserSession.getInstance().getDocumentCategoryAndClear();
+        if (pathFromSession != null) {
+            fileToView = new File(pathFromSession);
+        }
+
         if (fileToView != null && fileToView.exists()) {
             loadDocument(fileToView);
         } else {
             if (fileNameLabel != null) fileNameLabel.setText("No file selected.");
-            if (downloadButton != null) downloadButton.setDisable(true);
-            if (contentArea != null) contentArea.setText("Please go back and select a document.");
+            contentArea.setText("Please go back and select a document.");
         }
     }
 

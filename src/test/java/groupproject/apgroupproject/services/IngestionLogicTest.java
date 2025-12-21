@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class IngestionLogicTest {
 
-    // Helper method that mimics your AdminController logic
     private boolean isFileSupported(String filename) {
         if (filename == null) return false;
         String lower = filename.toLowerCase();

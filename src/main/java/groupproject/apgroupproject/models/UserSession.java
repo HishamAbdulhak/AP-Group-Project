@@ -38,7 +38,7 @@ public class UserSession {
         instance = null;
     }
 
-    // --- Getters ---
+    //Getters
     public String getId() {
         return id;
     }
@@ -55,7 +55,7 @@ public class UserSession {
         return isAdmin;
     }
 
-    // --- Pending Question Logic (Dashboard -> Chat) ---
+    //Pending Question Logic (Dashboard -> Chat)
     public void setPendingQuestion(String question) {
         this.pendingQuestion = question;
     }

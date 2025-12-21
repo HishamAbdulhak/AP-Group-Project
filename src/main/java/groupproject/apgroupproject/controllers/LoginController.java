@@ -34,15 +34,13 @@ public class LoginController extends BaseController {
     public LoginController() {
         this.authService = new FileAuthentication("students.txt", "admins.txt");
         this.notifyService = new AlertService();
-        // Note: 'navService' is already initialized by BaseController
     }
 
     @FXML
     public void initialize() {
-        // We don't need setupSidebar() here because the login screen has no sidebar.
     }
 
-    // --- LogIn Logic ---
+    // --- Login Logic ---
 
     @FXML
     private void handleStudentLogin(ActionEvent event) {
@@ -97,19 +95,19 @@ public class LoginController extends BaseController {
             return;
         }
 
-        // Validate Email
+        // 3. Validate Email
         if (!email.contains("@")) {
             notifyService.showErrorMessage("Invalid Email", "Please enter a valid email address containing '@'.");
             return;
         }
 
-        // Validate Password
+        // 4. Validate Password
         if (pass.length() < 8) {
             notifyService.showErrorMessage("Weak Password", "Password must be at least 8 characters long.");
             return;
         }
 
-        // Attempt Registration
+        // 5. Attempt Registration
         boolean isRegistered = authService.register(id, name, email, pass, passcode);
 
         if (isRegistered) {

@@ -69,7 +69,7 @@ public class FileAuthentication implements AuthenticationService {
         return false;
     }
 
-    // 3. Register New Student (FIXED)
+    // 3. Register New Student
     @Override
     public boolean register(String id, String name, String email, String password, String securityCode) {
         if (isStudentIdTaken(id)) {
@@ -79,14 +79,13 @@ public class FileAuthentication implements AuthenticationService {
         try (FileWriter fw = new FileWriter(studentFile, true);
              BufferedWriter bw = new BufferedWriter(fw)) {
 
-            // FIX: Check if file has content. If so, start on a new line first.
+            // Check if file has content. If so, start on a new line first.
             // This prevents the new user from being attached to the end of the previous line.
             if (studentFile.length() > 0) {
                 bw.newLine();
             }
 
             // Write the data (ID, Name, Email, Password, SecurityCode)
-            // We DO NOT add a newline at the end, so the file stops exactly at the last character.
             bw.write(id + "," + name + "," + email + "," + password + "," + securityCode);
 
             return true;

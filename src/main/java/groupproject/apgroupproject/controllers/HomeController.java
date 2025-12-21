@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.Node;
+import javafx.stage.DirectoryChooser;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -43,7 +45,7 @@ public class HomeController extends BaseController {
     public void initialize() {
         super.setupSidebar();
 
-        // 1. "Ask AI" Logic
+        // 1. "Ask AI" Logic - Links to AIChat.fxml
         askAiButton.setOnAction(e -> {
             String question = questionText.getText();
             if (question != null && !question.trim().isEmpty()) {
@@ -54,7 +56,7 @@ public class HomeController extends BaseController {
             }
         });
 
-        // 2. Direct Mappings to Built-in Viewer (Quick Access)
+        // 2. Quick Access Buttons - Links to DocumentViewer.fxml
         admissionsButtton.setOnAction(e -> viewDocumentDirectly("admission and application guide.docx", admissionsButtton));
         examsAndGrades.setOnAction(e -> viewDocumentDirectly("exam and assessment guide.docx", examsAndGrades));
         idCard.setOnAction(e -> viewDocumentDirectly("id card fee.pdf", idCard));
@@ -62,49 +64,75 @@ public class HomeController extends BaseController {
         library.setOnAction(e -> viewDocumentDirectly("library rules and system.docx", library));
         accommodation.setOnAction(e -> viewDocumentDirectly("accommodation.pdf", accommodation));
 
-        // 3. Trending Questions Mappings
-        resetStudentEmail.setOnAction(e -> viewDocumentDirectly("document student email facility.docx", resetStudentEmail));
+        // 3. Hyperlinks - Trending Questions & Downloads
 
-        // Updated to download the Exam Guidelines directly
+        // Viewer Link
+        // Inside initialize() method of HomeController.java
+        resetStudentEmail.setOnAction(e -> viewDocumentDirectly("student email facility.docx", resetStudentEmail));
+
+        //Exam PDF is Downloadable
         examPDF.setOnAction(e -> downloadToSystem("exam and assessment guide.docx", "Exam Guidelines"));
 
-        clubOptions.setOnAction(e -> askSpecificQuestion("What clubs are there?", clubOptions));
-        courseDeadline.setOnAction(e -> askSpecificQuestion("When are the course deadlines?", courseDeadline));
+        // AI Chat Links
+        clubOptions.setOnAction(e -> askSpecificQuestion("What campus clubs are available?", clubOptions));
+        courseDeadline.setOnAction(e -> askSpecificQuestion("When is the deadline for course registration?", courseDeadline));
 
-        // 4. Specialized Download for Campus Map
+        //Campus Map is now Downloadable
         campusMap.setOnAction(e -> downloadToSystem("TaylorParkZone-1.pdf", "Campus Map"));
     }
 
     private void viewDocumentDirectly(String fileName, Node sourceNode) {
-        String fullPath = "project_documents/" + fileName;
-        File file = new File(fullPath);
+        // Force the app to look at the absolute path of your project root
+        File projectDir = new File("").getAbsoluteFile();
+        File file = new File(projectDir, "project_documents/" + fileName);
 
         if (file.exists()) {
-            UserSession.getInstance().setDocumentCategory(fullPath);
+            // Pass the absolute path so the DocumentViewer knows exactly where to look
+            UserSession.getInstance().setDocumentCategory(file.getAbsolutePath());
             navService.navigateTo("DocumentViewer.fxml", sourceNode);
         } else {
+            // Debugging print to see exactly where it is looking in your console
+            System.out.println("DEBUG: File not found at: " + file.getAbsolutePath());
             alertService.showErrorMessage("File Error", "Could not find the document: " + fileName);
         }
     }
 
     private void downloadToSystem(String fileName, String displayName) {
-        boolean confirm = alertService.showConfirmation("Download " + displayName,
-                "Do you want to download the " + displayName + " to your system?");
+        // Ask the user to select a folder
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Select Folder to Save " + displayName);
 
-        if (confirm) {
+        // Show the dialog
+        File selectedDirectory = directoryChooser.showDialog(askAiButton.getScene().getWindow());
+
+        if (selectedDirectory != null) {
             try {
-                File source = new File("project_documents/" + fileName);
-                String userHome = System.getProperty("user.home");
-                File destination = new File(userHome + "/Downloads/" + fileName);
+                // Find the source file in project_documents
+                File projectDir = new File("").getAbsoluteFile();
+                File source = new File(projectDir, "project_documents/" + fileName);
 
+                if (!source.exists()) {
+                    alertService.showErrorMessage("Source Missing", "The file " + fileName + " is missing from the project folder.");
+                    return;
+                }
+
+                // Define the destination path based on user selection
+                File destination = new File(selectedDirectory, fileName);
+
+                // Perform the copy
                 Files.copy(source.toPath(), destination.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
-                alertService.showInfoMessage("Success", displayName + " has been saved to your Downloads folder.");
+                alertService.showInfoMessage("Success", displayName + " has been saved to: " + selectedDirectory.getAbsolutePath());
+                System.out.println("Download Successful: " + destination.getAbsolutePath());
+
             } catch (IOException ex) {
                 alertService.showErrorMessage("Download Failed", "An error occurred while saving the file: " + ex.getMessage());
             }
         }
     }
+
+
+    // Passes a specific question directly to the AI Chat
 
     private void askSpecificQuestion(String question, Node sourceNode) {
         UserSession.getInstance().setPendingQuestion(question);

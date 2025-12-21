@@ -15,3 +15,28 @@
 2025-12-21 18:55:46 [INFO] User logged in successfully: 123456
 2025-12-21 19:00:59 [INFO] Admin logged in: admin1
 2025-12-21 19:04:09 [INFO] Admin logged in: admin1
+2025-12-21 19:34:47 [INFO] Admin logged in: admin1
+2025-12-21 19:36:47 [ERROR] Failed login attempt: 123456
+2025-12-21 19:37:10 [INFO] User logged in successfully: 123456
+2025-12-21 19:37:31 [INFO] User logged in successfully: 123456
+2025-12-21 19:40:01 [INFO] User logged in successfully: 123456
+2025-12-21 19:41:46 [INFO] Admin logged in: admin1
+2025-12-21 19:43:14 [INFO] File uploaded: test result.txt
+2025-12-21 19:43:21 [INFO] File uploaded: bus schedule.txt
+2025-12-21 19:43:49 [INFO] User logged in successfully: 123456
+2025-12-21 19:48:00 [INFO] User logged in successfully: 123456
+2025-12-21 19:48:38 [INFO] Admin logged in: admin1
+2025-12-21 19:57:13 [INFO] Admin logged in: admin1
+2025-12-21 20:07:40 [INFO] Admin logged in: admin1
+2025-12-21 20:12:17 [INFO] User logged in successfully: 123456
+2025-12-21 20:16:27 [INFO] User logged in successfully: 123456
+2025-12-21 20:17:42 [INFO] User logged in successfully: 123456
+2025-12-21 20:21:03 [INFO] User logged in successfully: 123456
+2025-12-21 20:21:29 [INFO] Admin logged in: admin1
+2025-12-21 20:27:31 [INFO] User logged in successfully: 123456
+2025-12-21 20:28:40 [INFO] User logged in successfully: 123456
+2025-12-21 20:35:17 [INFO] User logged in successfully: 123456
+2025-12-21 20:49:27 [INFO] Admin logged in: admin1
+2025-12-21 20:50:21 [INFO] File uploaded: grade and transcript system.pdf
+2025-12-21 20:50:54 [INFO] User logged in successfully: 123456
+2025-12-21 21:00:49 [INFO] User logged in successfully: 123456

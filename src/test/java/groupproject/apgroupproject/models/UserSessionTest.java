@@ -8,13 +8,11 @@ class UserSessionTest {
 
     @AfterEach
     void tearDown() {
-        // Correct method name from your code
         UserSession.cleanSession();
     }
 
     @Test
     void testStartSession() {
-        // Correct method arguments from your code
         UserSession.startSession("1", "User", "email", "pass", false);
         assertNotNull(UserSession.getInstance());
         assertEquals("User", UserSession.getInstance().getName());

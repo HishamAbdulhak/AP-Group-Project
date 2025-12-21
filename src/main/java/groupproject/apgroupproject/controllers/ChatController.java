@@ -43,9 +43,7 @@ public class ChatController extends BaseController {
         // 2. Handle Pending Questions (from Dashboard)
         String pending = UserSession.getInstance().getPendingQuestionAndClear();
         if (pending != null) {
-            // FIX: Use addMessageBubble instead of chatArea
             addMessageBubble(pending, true);
-            // FIX: Call the new shared method
             initiateAiTask(pending);
         }
 
@@ -74,7 +72,7 @@ public class ChatController extends BaseController {
         initiateAiTask(message);
     }
 
-    // NEW SHARED METHOD: Handles the AI logic for both button clicks and pending questions
+    //Handles the AI logic for both button clicks and pending questions
     private void initiateAiTask(String message) {
         // Safety Check
         if (!BaseController.isAiReady) {

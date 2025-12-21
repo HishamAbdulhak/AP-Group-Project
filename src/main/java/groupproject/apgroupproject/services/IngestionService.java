@@ -10,6 +10,7 @@ import dev.langchain4j.store.embedding.EmbeddingStoreIngestor;
 import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.store.embedding.EmbeddingStore;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class IngestionService {
@@ -50,21 +51,34 @@ public class IngestionService {
         File[] files = folder.listFiles();
         if (files == null) return;
 
-        System.out.println("Starting Bulk Ingestion from: " + folderPath);
-        int count = 0;
+        List<Document> documents = new ArrayList<>();
+
+        System.out.println("Preparing documents for Bulk Ingestion from: " + folderPath);
         for (File file : files) {
-            String name = file.getName().toLowerCase();
-            if (name.endsWith(".pdf") || name.endsWith(".docx") || name.endsWith(".txt")) {
+            String name = file.getName();
+            String lowerName = name.toLowerCase();
+            if (lowerName.endsWith(".pdf") || lowerName.endsWith(".docx") || lowerName.endsWith(".txt")) {
                 try {
-                    ingestFile(file); // Re-use your existing single-file logic
-                    System.out.println("   - Ingested: " + file.getName());
-                    count++;
+                    // Load the document but DON'T ingest it yet
+                    Document doc = loadSingleDocument(file);
+                    doc.metadata().add("file_name", file.getName());
+                    documents.add(doc);
+                    System.out.println("   - Prepared: " + file.getName());
                 } catch (Exception e) {
-                    System.err.println("    Failed to ingest: " + file.getName());
+                    System.err.println("    Failed to load: " + file.getName());
                 }
             }
         }
-        System.out.println(" Bulk Ingestion Complete. Loaded " + count + " documents.");
+        EmbeddingStoreIngestor ingestor = EmbeddingStoreIngestor.builder()
+                .documentSplitter(DocumentSplitters.recursive(500, 50))
+                .embeddingModel(embeddingModel)
+                .embeddingStore(embeddingStore)
+                .build();
+        if (!documents.isEmpty()) {
+            ingestor.ingest(documents);
+        }
+
+        System.out.println(" Bulk Ingestion Complete. Loaded " + documents.size() + " documents.");
     }
 
 }

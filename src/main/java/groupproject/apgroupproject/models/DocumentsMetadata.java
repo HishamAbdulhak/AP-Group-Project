@@ -13,7 +13,7 @@ public class DocumentsMetadata {
         this.status = status;
     }
 
-    // Getters are required for JavaFX TableView
+    // Getters
     public String getFileName() {
         return fileName;
     }
@@ -26,7 +26,7 @@ public class DocumentsMetadata {
         return status;
     }
 
-    // Setter allows us to change status (e.g. "Pending" -> "Ingested")
+    // Setter
     public void setStatus(String status) {
         this.status = status;
     }

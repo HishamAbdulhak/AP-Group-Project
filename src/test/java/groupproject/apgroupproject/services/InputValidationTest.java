@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InputValidationTest {
 
-    // --- Helper Logic (Simulates your Controller) ---
     private boolean isValidEmail(String email) { return email != null && email.contains("@") && email.contains("."); }
     private boolean isValidPassword(String pass) { return pass != null && pass.length() >= 8; }
     private boolean isNumeric(String str) { return str != null && str.matches("\\d+"); }

@@ -38,7 +38,7 @@ public class AdminController extends BaseController {
     public void initialize() {
         super.setupSidebar();
 
-        //Setup the Table Columns
+        // Setup the Table Columns
         if (fileNameCol != null) {
             fileNameCol.setCellValueFactory(new PropertyValueFactory<>("fileName"));
         }
@@ -51,12 +51,12 @@ public class AdminController extends BaseController {
             fileStatusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
         }
 
-        //Connect the Settings Button
+        // Connect the Settings Button
         if (adminSettings != null) {
             adminSettings.setOnAction(e -> navService.navigateTo("SettingsPage.fxml", adminSettings));
         }
 
-        //Connect the Upload Button
+        // Connect the Upload Button
         if (uploadButton != null) {
             uploadButton.setOnAction(e -> handleFileChooser());
         }
@@ -69,11 +69,11 @@ public class AdminController extends BaseController {
             setupActionsColumn();
         }
 
-        //This adds file persistence, the files will all load when the app is re-opened.
+        // This adds file persistence, the files will all load when the app is re-opened.
         loadExistingFile();
     }
 
-    //The Logic
+    // The Logic
     private void handleFileChooser() {
         FileChooser fileChooser = new FileChooser();
 
@@ -105,13 +105,13 @@ public class AdminController extends BaseController {
             event.consume();
         });
 
-        //Drag Exit - Reset color
+        // Drag Exit - Reset color
         dropZone.setOnDragExited((DragEvent event) -> {
             dropZone.setStyle("-fx-background-color: #F0F8FF; -fx-border-color: #3498db; -fx-border-width: 2; -fx-border-style: dashed; -fx-background-radius: 10; -fx-border-radius: 10;");
             event.consume();
         });
 
-        //Dropped - Get the file
+        // Dropped - Get the file
         dropZone.setOnDragDropped((DragEvent event) -> {
             Dragboard db = event.getDragboard();
             boolean success = false;
@@ -133,16 +133,16 @@ public class AdminController extends BaseController {
     // Saves file and updates Table
     private void saveFile(File sourceFile) {
         try {
-            //Ensure the storage directory exists
+            // Ensure the storage directory exists
             File destDir = new File("project_documents");
             if (!destDir.exists()) {
                 destDir.mkdirs();
             }
 
-            //Define the destination file
+            // Define the destination file
             File destFile = new File(destDir, sourceFile.getName());
 
-            //Copy the file (Overwrite if exists)
+            // Copy the file (Overwrite if exists)
             Files.copy(
                     sourceFile.toPath(),
                     destFile.toPath(),
@@ -152,24 +152,25 @@ public class AdminController extends BaseController {
             if (ingestionService != null) {
                 try {
                     System.out.println("Ingesting file into AI Memory: " + destFile.getName());
-                    ingestionService.ingestFile(destFile); // <--- THIS MAKES THE AI SMART
+                    // Batch ingest for better performance
+                    ingestionService.ingestAllFiles("project_documents");
                     System.out.println("Ingestion Successful!");
                 } catch (Exception e) {
                     System.err.println("AI Ingestion Failed (Chat won't know this file): " + e.getMessage());
                 }
             }
 
-            //Resets file modify time to NOW so "Last Update Time" can be measured accurately
+            // Resets file modify time to NOW so "Last Update Time" can be measured accurately
             destFile.setLastModified(System.currentTimeMillis());
 
-            //Add to the Table
+            // Add to the Table
             DocumentsMetadata newMeta = new DocumentsMetadata(
                     sourceFile.getName(),
                     LocalDate.now(),
                     "Uploaded"
             );
 
-            //This adds the row to the UI
+            // This adds the row to the UI
             filesTable.getItems().add(newMeta);
 
             // Update the stats immediately after saving
@@ -184,7 +185,7 @@ public class AdminController extends BaseController {
         }
     }
 
-    //This adds file persistence, the files will all load when the app is re-opened.
+    // This adds file persistence, the files will all load when the app is re-opened.
     private void loadExistingFile() {
         File folder = new File("project_documents");
 
@@ -195,27 +196,17 @@ public class AdminController extends BaseController {
                 // Bulk ingest to ensure AI knows about these files on startup
                 if (ingestionService != null) {
                     System.out.println("Reloading existing files into AI memory...");
+                    ingestionService.ingestAllFiles("project_documents");
                 }
 
                 for (File file : files) {
                     String name = file.getName().toLowerCase();
                     if (name.endsWith(".pdf") || name.endsWith(".docx") || name.endsWith(".txt")) {
-
-                        // 1. Add to UI
                         LocalDate fileDate = java.time.Instant.ofEpochMilli(file.lastModified())
                                 .atZone(java.time.ZoneId.systemDefault())
                                 .toLocalDate();
                         DocumentsMetadata metadata = new DocumentsMetadata(file.getName(), fileDate, "Stored");
                         filesTable.getItems().add(metadata);
-
-                        // 2. Add to AI (CRITICAL FIX)
-                        if (ingestionService != null) {
-                            try {
-                                ingestionService.ingestFile(file);
-                            } catch (Exception e) {
-                                System.err.println("Error re-ingesting " + name);
-                            }
-                        }
                     }
                 }
                 updateDashboardStats();

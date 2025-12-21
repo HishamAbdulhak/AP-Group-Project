@@ -24,10 +24,9 @@ public class AccountSettingsController extends BaseController {
     public void initialize() {
         super.setupSidebar();
 
-        // 1. Check if user is logged in
+        //Check if user is logged in
         if (UserSession.getInstance() != null && UserSession.getInstance().getId() != null) {
 
-            // FIX: Added .getInstance()
             if (fullNameField != null) fullNameField.setText(UserSession.getInstance().getName());
             if (emailField != null) emailField.setText(UserSession.getInstance().getEmail());
         }
@@ -77,7 +76,6 @@ public class AccountSettingsController extends BaseController {
             return;
         }
 
-        // UPDATE (Using the ID from the session)
         boolean success = authService.updateStudentProfile(
                 session.getId(),
                 finalName,
@@ -88,7 +86,7 @@ public class AccountSettingsController extends BaseController {
         if (success) {
             alertService.showInfoMessage("Success", "Profile updated successfully!");
 
-            // IMPORTANT: Update the session data immediately
+            // Update the session data immediately
             UserSession.startSession(
                     session.getId(),
                     finalName,
