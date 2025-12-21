@@ -10,8 +10,7 @@ import javafx.scene.control.Button;
 
 public abstract class BaseController {
 
-    // Static services allow data to persist across all screens
-    protected static RAGService.RagService ragService;
+    protected static RAGService ragService;
     protected static IngestionService ingestionService;
 
     // Flag to track if the AI has finished loading documents
@@ -32,11 +31,10 @@ public abstract class BaseController {
         if (ragService == null) {
             try {
                 System.out.println("Initializing AI Services...");
-                ragService = new RAGService.RagService();
-
+                ragService = new RAGService();
                 ingestionService = new IngestionService(
-                        ragService.getEmbeddingModel(),
-                        ragService.getEmbeddingStore()
+                        RAGService.createEmbeddingModel(), // Creates a fresh model instance matching config
+                        RAGService.getEmbeddingStore()     // Uses the SHARED static memory
                 );
 
                 // Run Ingestion in a Background Thread
@@ -80,6 +78,7 @@ public abstract class BaseController {
             myProfileButton.setOnAction(e -> navService.navigateTo("AccountSettings.fxml", myProfileButton));
 
         if (adminDashboard != null) {
+            // Check if user is Admin to show/hide dashboard button
             if (UserSession.getInstance().isAdmin()) {
                 adminDashboard.setVisible(true);
                 adminDashboard.setManaged(true);

@@ -25,7 +25,7 @@ public class SettingsPageController extends BaseController {
 
         // Back navigation
         if (backButton != null) {
-            backButton.setOnAction(_ ->
+            backButton.setOnAction(e ->
                     navService.navigateTo("AdminDashboard.fxml", backButton)
             );
         }
@@ -46,7 +46,7 @@ public class SettingsPageController extends BaseController {
             temperatureSlider.setMax(1.0);
             temperatureSlider.setValue(cfg.getTemperature());
 
-            temperatureSlider.valueProperty().addListener((_, __, newV) ->
+            temperatureSlider.valueProperty().addListener((obs, oldV, newV) ->
                     updateTempLabel(newV.doubleValue())
             );
         }
@@ -55,12 +55,12 @@ public class SettingsPageController extends BaseController {
 
         // Save
         if (saveButton != null) {
-            saveButton.setOnAction(_ -> save());
+            saveButton.setOnAction(e -> save());
         }
 
         // Reset
         if (resetButton != null) {
-            resetButton.setOnAction(_ -> resetDefaults());
+            resetButton.setOnAction(e -> resetDefaults());
         }
     }
 

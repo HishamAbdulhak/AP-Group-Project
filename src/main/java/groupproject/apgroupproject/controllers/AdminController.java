@@ -185,8 +185,6 @@ public class AdminController extends BaseController {
     }
 
     //This adds file persistence, the files will all load when the app is re-opened.
-    // In AdminController.java
-
     private void loadExistingFile() {
         File folder = new File("project_documents");
 
@@ -194,20 +192,32 @@ public class AdminController extends BaseController {
             File[] files = folder.listFiles();
 
             if (files != null) {
+                // Bulk ingest to ensure AI knows about these files on startup
+                if (ingestionService != null) {
+                    System.out.println("Reloading existing files into AI memory...");
+                }
+
                 for (File file : files) {
-                    //Validation
                     String name = file.getName().toLowerCase();
                     if (name.endsWith(".pdf") || name.endsWith(".docx") || name.endsWith(".txt")) {
 
-                        //Add to UI Table (Existing code)
+                        // 1. Add to UI
                         LocalDate fileDate = java.time.Instant.ofEpochMilli(file.lastModified())
                                 .atZone(java.time.ZoneId.systemDefault())
                                 .toLocalDate();
                         DocumentsMetadata metadata = new DocumentsMetadata(file.getName(), fileDate, "Stored");
                         filesTable.getItems().add(metadata);
+
+                        // 2. Add to AI (CRITICAL FIX)
+                        if (ingestionService != null) {
+                            try {
+                                ingestionService.ingestFile(file);
+                            } catch (Exception e) {
+                                System.err.println("Error re-ingesting " + name);
+                            }
+                        }
                     }
                 }
-                // Update stats
                 updateDashboardStats();
             }
         }
