@@ -63,9 +63,9 @@ public class HomeController extends BaseController {
         accommodation.setOnAction(e -> viewDocumentDirectly("accommodation.pdf", accommodation));
 
         // 3. Trending Questions Mappings
-        resetStudentEmail.setOnAction(e -> viewDocumentDirectly("student email facility.docx", resetStudentEmail));
+        resetStudentEmail.setOnAction(e -> viewDocumentDirectly("document student email facility.docx", resetStudentEmail));
 
-        // UPDATED: Now calls downloadToSystem instead of viewDocumentDirectly
+        // Updated to download the Exam Guidelines directly
         examPDF.setOnAction(e -> downloadToSystem("exam and assessment guide.docx", "Exam Guidelines"));
 
         clubOptions.setOnAction(e -> askSpecificQuestion("What clubs are there?", clubOptions));
@@ -87,7 +87,6 @@ public class HomeController extends BaseController {
         }
     }
 
-    // UPDATED: Added a displayName parameter to make the alerts more dynamic
     private void downloadToSystem(String fileName, String displayName) {
         boolean confirm = alertService.showConfirmation("Download " + displayName,
                 "Do you want to download the " + displayName + " to your system?");
