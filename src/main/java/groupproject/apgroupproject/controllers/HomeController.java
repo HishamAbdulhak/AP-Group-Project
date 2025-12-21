@@ -16,7 +16,7 @@ import java.nio.file.StandardCopyOption;
 
 public class HomeController extends BaseController {
 
-    private final NotificationService alertService; // Using your custom Service
+    private final NotificationService alertService;
 
     @FXML private TextField questionText;
     @FXML private Button askAiButton;
@@ -64,12 +64,15 @@ public class HomeController extends BaseController {
 
         // 3. Trending Questions Mappings
         resetStudentEmail.setOnAction(e -> viewDocumentDirectly("student email facility.docx", resetStudentEmail));
-        examPDF.setOnAction(e -> viewDocumentDirectly("exam and assessment guide.docx", examPDF));
-        clubOptions.setOnAction(e -> viewDocumentDirectly("campus clubs.docx", clubOptions));
+
+        // UPDATED: Now calls downloadToSystem instead of viewDocumentDirectly
+        examPDF.setOnAction(e -> downloadToSystem("exam and assessment guide.docx", "Exam Guidelines"));
+
+        clubOptions.setOnAction(e -> askSpecificQuestion("What clubs are there?", clubOptions));
         courseDeadline.setOnAction(e -> askSpecificQuestion("When are the course deadlines?", courseDeadline));
 
         // 4. Specialized Download for Campus Map
-        campusMap.setOnAction(e -> downloadToSystem("TaylorParkZone-1.pdf"));
+        campusMap.setOnAction(e -> downloadToSystem("TaylorParkZone-1.pdf", "Campus Map"));
     }
 
     private void viewDocumentDirectly(String fileName, Node sourceNode) {
@@ -84,8 +87,10 @@ public class HomeController extends BaseController {
         }
     }
 
-    private void downloadToSystem(String fileName) {
-        boolean confirm = alertService.showConfirmation("Download Map", "Do you want to download the Campus Map to your system?");
+    // UPDATED: Added a displayName parameter to make the alerts more dynamic
+    private void downloadToSystem(String fileName, String displayName) {
+        boolean confirm = alertService.showConfirmation("Download " + displayName,
+                "Do you want to download the " + displayName + " to your system?");
 
         if (confirm) {
             try {
@@ -94,10 +99,10 @@ public class HomeController extends BaseController {
                 File destination = new File(userHome + "/Downloads/" + fileName);
 
                 Files.copy(source.toPath(), destination.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                
-                alertService.showInfoMessage("Success", "Campus Map has been saved to your Downloads folder.");
+
+                alertService.showInfoMessage("Success", displayName + " has been saved to your Downloads folder.");
             } catch (IOException ex) {
-                alertService.showErrorMessage("Download Failed", "An error occurred while saving the map: " + ex.getMessage());
+                alertService.showErrorMessage("Download Failed", "An error occurred while saving the file: " + ex.getMessage());
             }
         }
     }

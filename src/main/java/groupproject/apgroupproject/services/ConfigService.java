@@ -1,7 +1,6 @@
 package groupproject.apgroupproject.services;
 
 import groupproject.apgroupproject.models.AiConfig;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,18 +21,23 @@ public class ConfigService {
 
     /**
      * Loads AI configuration.
-     * Priority:
-     * 1) Local saved config file (working directory)
-     * 2) Resource defaults
-     * 3) Environment variable (API key only)
+     * Priority for API Key:
+     * 1) Local app_config.properties (Working directory) - Best for professor's portability
+     * 2) Computer's Environment Variable (OPENAI_API_KEY) - Secondary fallback
      */
     public AiConfig loadConfig() {
         Properties p = loadProperties();
 
-        String apiKey = firstNonEmpty(
-                p.getProperty(KEY_API),
-                System.getenv("OPENAI_API_KEY")
-        );
+        // Check the property file first (Self-contained approach)
+        String apiKey = p.getProperty(KEY_API);
+
+        // Fallback to environment variable only if the property file is blank
+        if (apiKey == null || apiKey.isBlank()) {
+            apiKey = System.getenv("OPENAI_API_KEY");
+        }
+
+        // Apply defaults if still blank
+        apiKey = (apiKey == null) ? "" : apiKey.trim();
 
         String chatModel = defaultIfBlank(
                 p.getProperty(KEY_CHAT_MODEL),
@@ -54,12 +58,13 @@ public class ConfigService {
     }
 
     /**
-      Saves user-selected configuration to local file.
+     * Saves user-selected configuration to local file.
+     * Ensures changes made in the GUI persist across restarts.
      */
     public void saveConfig(String apiKey, String chatModel, double temperature) {
         Properties p = loadProperties();
 
-        p.setProperty(KEY_API, safe(apiKey));
+        p.setProperty(KEY_API, (apiKey == null) ? "" : apiKey.trim());
         p.setProperty(KEY_CHAT_MODEL, defaultIfBlank(chatModel, DEFAULT_CHAT_MODEL));
         p.setProperty(KEY_TEMP, String.valueOf(temperature));
 
@@ -75,13 +80,13 @@ public class ConfigService {
     private Properties loadProperties() {
         Properties p = new Properties();
 
-        // Load defaults from resources
+        // 1. Load defaults from inside the JAR/Resource folder
         try (InputStream in = getClass().getClassLoader()
                 .getResourceAsStream("groupproject.apgroupproject/" + CONFIG_FILE)) {
             if (in != null) p.load(in);
         } catch (IOException ignored) {}
 
-        // Load user-saved config from working directory
+        // 2. Overwrite with user-saved config from the project root [cite: 214]
         Path local = Path.of(CONFIG_FILE);
         if (Files.exists(local)) {
             try (InputStream in = Files.newInputStream(local)) {
@@ -104,16 +109,6 @@ public class ConfigService {
         return (v == null || v.isBlank()) ? def : v.trim();
     }
 
-    private static String firstNonEmpty(String a, String b) {
-        if (a != null && !a.isBlank()) return a.trim();
-        if (b != null && !b.isBlank()) return b.trim();
-        return "";
-    }
-
-    private static String safe(String v) {
-        return v == null ? "" : v.trim();
-    }
-
     private static double parseDouble(String v, double def) {
         try {
             return v == null ? def : Double.parseDouble(v.trim());
@@ -122,7 +117,6 @@ public class ConfigService {
         }
     }
 
-    // Backward compatibility (in case other code still calls this)
     public AiConfig loadAiConfig() {
         return loadConfig();
     }
