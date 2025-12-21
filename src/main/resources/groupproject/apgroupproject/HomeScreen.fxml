@@ -184,12 +184,12 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="campusLife" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;" text="Campus Life" wrapText="true" GridPane.columnIndex="2">
+                              <Button fx:id="idCard" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;" text="ID Card" wrapText="true" GridPane.columnIndex="2">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="itSupport" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;" text="IT Support" wrapText="true" GridPane.rowIndex="1">
+                              <Button fx:id="transfer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;" text="Transfer" wrapText="true" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -199,7 +199,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="financialAid" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #1abc9c; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;" text="Financial Aid" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                              <Button fx:id="accommodation" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #1abc9c; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;" text="Accommodation" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
