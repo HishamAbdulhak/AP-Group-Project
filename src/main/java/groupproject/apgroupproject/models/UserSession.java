@@ -39,11 +39,21 @@ public class UserSession {
     }
 
     // --- Getters ---
-    public String getId() { return id; }
-    public String getName() { return name; }
-    public String getEmail() { return email; }
-    public String getPassword() { return password; }
-    public boolean isAdmin() { return isAdmin; }
+    public String getId() {
+        return id;
+    }
+    public String getName() {
+        return name;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public boolean isAdmin() {
+        return isAdmin;
+    }
 
     // --- Pending Question Logic (Dashboard -> Chat) ---
     public void setPendingQuestion(String question) {
@@ -56,8 +66,6 @@ public class UserSession {
         return temp;
     }
 
-    // --- NEW: Document Category Logic (Dashboard -> Browser) ---
-    // This fixes "Cannot resolve method 'setDocumentCategory'"
     public void setDocumentCategory(String category) {
         this.documentCategory = category;
     }
@@ -66,7 +74,6 @@ public class UserSession {
         return documentCategory;
     }
 
-    // Optional: Use this if you want the filter to reset after one use
     public String getDocumentCategoryAndClear() {
         String temp = this.documentCategory;
         this.documentCategory = null;
